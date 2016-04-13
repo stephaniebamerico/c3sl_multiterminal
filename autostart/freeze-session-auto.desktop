@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Autostart commands for freeze sessions
+Exec=freeze-session-auto

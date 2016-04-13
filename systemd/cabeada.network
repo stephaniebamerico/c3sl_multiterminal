@@ -1,0 +1,10 @@
+# Configuração de IP dinâmico para redes cabeadas
+[Match]
+Name=en*
+
+[Network]
+DHCP=yes
+
+[DHCP]
+UseDomains=yes
+RouteMetric=10

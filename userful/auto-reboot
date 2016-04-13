@@ -1,0 +1,5 @@
+#!/bin/sh
+timeout=10
+echo "Reiniciando em ${timeout} segundos..."
+sleep ${timeout}
+reboot

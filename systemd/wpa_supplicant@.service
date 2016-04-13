@@ -1,0 +1,12 @@
+[Unit]
+Description=WPA Supplicant %i
+Wants=network.target
+Before=network.target
+Requires=sys-subsystem-net-devices-%i.device
+After=sys-subsystem-net-devices-%i.device
+
+[Service]
+ExecStart=/sbin/wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant-%I.conf -i%I
+
+[Install]
+WantedBy=multi-user.target

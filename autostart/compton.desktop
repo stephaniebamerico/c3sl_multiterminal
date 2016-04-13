@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Compton (X Compositor)
+GenericName=X compositor
+Comment=A X compositor
+TryExec=compton
+Exec=compton --config /etc/xdg/compton.conf
