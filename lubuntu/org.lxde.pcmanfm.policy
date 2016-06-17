@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+  
+
+ <vendor>PCManFM</vendor>
+ <vendor_url>http://lxde.org/</vendor_url>
+ <icon_name>system-file-manager</icon_name>
+
+
+ <action id="org.lxde.pcmanfm">
+ 
+ <description>Run PCManFM as root</description>
+ <description xml:lang="ar">شغل ثونار كجذر</description>
+ <description xml:lang="ast">Executar PCManFM como root</description>
+ <description xml:lang="bg">Стартирай PCManFM като администратор</description>
+ <description xml:lang="cs">Spustit PCManFM jako root</description>
+ <description xml:lang="da">Kør PCManFM med rodrettigheder</description>
+ <description xml:lang="de">PCManFM als Systemverwalter starten</description>
+ <description xml:lang="el">Εκτέλεση PCManFM ως διαχειριστής</description>
+ <description xml:lang="en_AU">Run PCManFM as root</description>
+ <description xml:lang="es">Iniciar PCManFM como superusuario</description>
+ <description xml:lang="fi">Käynnistä PCManFM pääkäyttäjän oikeuksin.</description>
+ <description xml:lang="fr">Lancer PCManFM en tant que root</description>
+ <description xml:lang="gl">Executar PCManFM como administrador</description>
+ <description xml:lang="he">הרץ את PCManFM בתור שורש</description>
+ <description xml:lang="hr">Pokreni PCManFM kao root korisnik</description>
+ <description xml:lang="hu">PCManFM futtatása rendszergazdaként</description>
+ <description xml:lang="is">Keyra PCManFM sem kerfisstjóri (root)</description>
+ <description xml:lang="it">Esegui PCManFM come amministratore</description>
+ <description xml:lang="ja">root で PCManFM を起動</description>
+ <description xml:lang="kk">PCManFM-ды әкімші ретінде орындау</description>
+ <description xml:lang="ko">Root 권한으로 PCManFM 작동</description>
+ <description xml:lang="lt">Vykdyti PCManFM administratoriaus teisėmis</description>
+ <description xml:lang="ms">Jalankan PCManFM sebagai root</description>
+ <description xml:lang="nb">Kjør PCManFM som root</description>
+ <description xml:lang="nl">PCManFM draaien met rootbevoegdheid</description>
+ <description xml:lang="pl">Uruchom PCManFM jako root</description>
+ <description xml:lang="pt">Executar PCManFM como root</description>
+ <description xml:lang="pt_BR">Rodar PCManFM como superusuário</description>
+ <description xml:lang="ro">Pornește PCManFM ca root</description>
+ <description xml:lang="ru">Запустить PCManFM от суперпользователя</description>
+ <description xml:lang="sk">Spustiť PCManFM ako root</description>
+ <description xml:lang="sr">Покрени Тунара са кореним овлашћењима</description>
+ <description xml:lang="th">เรียกทำงาน PCManFM ในฐานะ root</description>
+ <description xml:lang="tr">PCManFM'ı root olarak çalıştır</description>
+ <description xml:lang="uk">Запустити PCManFM з правами суперкористувача</description>
+ <description xml:lang="zh_CN">以 root 身份运行 PCManFM</description>
+ <description xml:lang="zh_TW">以 root 身份執行 PCManFM</description>
+ <message>Authentication is required to run PCManFM as root.</message>
+ <message xml:lang="ast">Ríquese l'autenticación pa executar PCManFM como root.</message>
+ <message xml:lang="bg">Изисква се удостоверяване за да стартирате PCManFM като администратор</message>
+ <message xml:lang="cs">Pro spuštění aplikace PCManFM jako root se vyžaduje autentizace.</message>
+ <message xml:lang="da">Der kræves godkendelse for at køre PCManFM som root.</message>
+ <message xml:lang="de">Legitimierung wird benötigt, um PCManFM als Systemverwalter zu starten.</message>
+ <message xml:lang="el">Απαιτείται πιστοποίηση για εκτέλεση του PCManFM ως διαχειριστής.</message>
+ <message xml:lang="en_AU">Authentication is required to run PCManFM as root.</message>
+ <message xml:lang="es">Es necesario autentificarse para iniciar PCManFM como superusuario.</message>
+ <message xml:lang="fi">Jotta PCManFM voidaan käynnistää pääkäyttäjän oikeuksin, todennus tarvitaan.</message>
+ <message xml:lang="fr">Une authentification est requise pour lancer PCManFM en tant que root.</message>
+ <message xml:lang="gl">Requírese autenticación para executar PCManFM como administrador</message>
+ <message xml:lang="he">נדרש אימות כדי להריץ את PCManFM בתור שורש.</message>
+ <message xml:lang="hr">Potrebna je provjera za pokretanje PCManFMa kao root.</message>
+ <message xml:lang="hu">A PCManFM rendszergazdai futtatásához hitelesítés szükséges.</message>
+ <message xml:lang="is">Auðkenningar er krafist til að keyra PCManFM sem kerfisstjóri (root)</message>
+ <message xml:lang="it">Per eseguire PCManFM come amministratore è richiesta l'autenticazione</message>
+ <message xml:lang="ja">root で PCManFM を起動するには認証が必要です。</message>
+ <message xml:lang="kk">PCManFM-ды әкімші ретінде орындау үшін аутентификация керек.</message>
+ <message xml:lang="ko">Root 권한으로 PCManFM를 작동하려면 인증이 필요합니다.</message>
+ <message xml:lang="lt">PCManFM vykdymui administratoriaus teisėmis, reikalingas tapatybės nustatymas.</message>
+ <message xml:lang="ms">Pengesahihan diperlukan untuk jalankan PCManFM sebagai root.</message>
+ <message xml:lang="nb">Identitetsbekreftelse kreves for å kjøre PCManFM som root.</message>
+ <message xml:lang="nl">Authenticatie is vereist om PCManFM met rootbevoegdheid te draaien.</message>
+ <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uruchomić program PCManFM w trybie administratora.</message>
+ <message xml:lang="pt">Autenticação necessária para executar PCManFM como root.</message>
+ <message xml:lang="pt_BR">Autenticação é requerida para rodar PCManFM como superusuário.</message>
+ <message xml:lang="ro">Pentru a porni PCManFM ca root este nevoie de autentificare.</message>
+ <message xml:lang="ru">Требуется аутентификация для запуска PCManFM от суперпользователя</message>
+ <message xml:lang="sk">Na spustenie PCManFMu ako root je potrebná autentifikácia.</message>
+ <message xml:lang="sr">Потребна је потврда овлашћења ради покретања Тунара под кореним овлашћењима</message>
+ <message xml:lang="th">ต้องยืนยันตัวบุคคลก่อนเรียกทำงาน PCManFM ในฐานะ root</message>
+ <message xml:lang="tr">PCManFM'ı root olarak çalıştırmak için kimlik doğrulaması gereklidir</message>
+ <message xml:lang="uk">Вимагається розпізнавання для запуску PCManFM з правами суперкористувача.</message>
+ <message xml:lang="zh_CN">以 root 身份运行 PCManFM 需要进行身份验证。</message>
+ <message xml:lang="zh_TW">要以 root 身份執行 PCManFM 需要認證。</message>
+ <defaults>
+ <allow_any>auth_admin</allow_any>
+ <allow_inactive>auth_admin</allow_inactive>
+ <allow_active>auth_admin</allow_active>
+ </defaults>
+ <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/pcmanfm</annotate>
+ <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+ </action>
+
+</policyconfig>

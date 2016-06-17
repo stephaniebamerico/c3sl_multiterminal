@@ -1,0 +1,17 @@
+#!/bin/sh
+apt autoremove
+apt clean
+rm /etc/epoptes/server.crt
+sed -i -e 's/^.*ComputerName.*$//g' /home/freezetemplate/.wine/system.reg
+rm -rf /root/.ssh
+rm -rf /root/.bash_history
+rm -rf /home/freezetemplate/.ssh
+rm -rf /home/freezetemplate/.bash_history
+rm -rf /home/freezetemplate/.cache/upstart/*.log
+rm -rf /home/freezetemplate/.cache/xfce4/xfce4-appfinder/history
+rm -rf /home/freezetemplate/.{X,ICE}authority
+rm -rf /home/admin/.ssh
+rm -rf /home/admin/.bash_history
+rm -rf /home/admin/.cache/upstart/*.log
+rm -rf /home/admin/.cache/xfce4/xfce4-appfinder/history
+rm -rf /home/admin/.{X,ICE}authority

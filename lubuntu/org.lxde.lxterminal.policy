@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+  
+
+ <vendor>LXTerminal</vendor>
+ <vendor_url>http://lxde.org/</vendor_url>
+ <icon_name>utilities-terminal</icon_name>
+
+
+ <action id="org.lxde.lxterminal">
+ 
+ <description>Run LXTerminal as root</description>
+ <description xml:lang="ar">شغل ثونار كجذر</description>
+ <description xml:lang="ast">Executar LXTerminal como root</description>
+ <description xml:lang="bg">Стартирай LXTerminal като администратор</description>
+ <description xml:lang="cs">Spustit LXTerminal jako root</description>
+ <description xml:lang="da">Kør LXTerminal med rodrettigheder</description>
+ <description xml:lang="de">LXTerminal als Systemverwalter starten</description>
+ <description xml:lang="el">Εκτέλεση LXTerminal ως διαχειριστής</description>
+ <description xml:lang="en_AU">Run LXTerminal as root</description>
+ <description xml:lang="es">Iniciar LXTerminal como superusuario</description>
+ <description xml:lang="fi">Käynnistä LXTerminal pääkäyttäjän oikeuksin.</description>
+ <description xml:lang="fr">Lancer LXTerminal en tant que root</description>
+ <description xml:lang="gl">Executar LXTerminal como administrador</description>
+ <description xml:lang="he">הרץ את LXTerminal בתור שורש</description>
+ <description xml:lang="hr">Pokreni LXTerminal kao root korisnik</description>
+ <description xml:lang="hu">LXTerminal futtatása rendszergazdaként</description>
+ <description xml:lang="is">Keyra LXTerminal sem kerfisstjóri (root)</description>
+ <description xml:lang="it">Esegui LXTerminal come amministratore</description>
+ <description xml:lang="ja">root で LXTerminal を起動</description>
+ <description xml:lang="kk">LXTerminal-ды әкімші ретінде орындау</description>
+ <description xml:lang="ko">Root 권한으로 LXTerminal 작동</description>
+ <description xml:lang="lt">Vykdyti LXTerminal administratoriaus teisėmis</description>
+ <description xml:lang="ms">Jalankan LXTerminal sebagai root</description>
+ <description xml:lang="nb">Kjør LXTerminal som root</description>
+ <description xml:lang="nl">LXTerminal draaien met rootbevoegdheid</description>
+ <description xml:lang="pl">Uruchom LXTerminal jako root</description>
+ <description xml:lang="pt">Executar LXTerminal como root</description>
+ <description xml:lang="pt_BR">Rodar LXTerminal como superusuário</description>
+ <description xml:lang="ro">Pornește LXTerminal ca root</description>
+ <description xml:lang="ru">Запустить LXTerminal от суперпользователя</description>
+ <description xml:lang="sk">Spustiť LXTerminal ako root</description>
+ <description xml:lang="sr">Покрени Тунара са кореним овлашћењима</description>
+ <description xml:lang="th">เรียกทำงาน LXTerminal ในฐานะ root</description>
+ <description xml:lang="tr">LXTerminal'ı root olarak çalıştır</description>
+ <description xml:lang="uk">Запустити LXTerminal з правами суперкористувача</description>
+ <description xml:lang="zh_CN">以 root 身份运行 LXTerminal</description>
+ <description xml:lang="zh_TW">以 root 身份執行 LXTerminal</description>
+ <message>Authentication is required to run LXTerminal as root.</message>
+ <message xml:lang="ast">Ríquese l'autenticación pa executar LXTerminal como root.</message>
+ <message xml:lang="bg">Изисква се удостоверяване за да стартирате LXTerminal като администратор</message>
+ <message xml:lang="cs">Pro spuštění aplikace LXTerminal jako root se vyžaduje autentizace.</message>
+ <message xml:lang="da">Der kræves godkendelse for at køre LXTerminal som root.</message>
+ <message xml:lang="de">Legitimierung wird benötigt, um LXTerminal als Systemverwalter zu starten.</message>
+ <message xml:lang="el">Απαιτείται πιστοποίηση για εκτέλεση του LXTerminal ως διαχειριστής.</message>
+ <message xml:lang="en_AU">Authentication is required to run LXTerminal as root.</message>
+ <message xml:lang="es">Es necesario autentificarse para iniciar LXTerminal como superusuario.</message>
+ <message xml:lang="fi">Jotta LXTerminal voidaan käynnistää pääkäyttäjän oikeuksin, todennus tarvitaan.</message>
+ <message xml:lang="fr">Une authentification est requise pour lancer LXTerminal en tant que root.</message>
+ <message xml:lang="gl">Requírese autenticación para executar LXTerminal como administrador</message>
+ <message xml:lang="he">נדרש אימות כדי להריץ את LXTerminal בתור שורש.</message>
+ <message xml:lang="hr">Potrebna je provjera za pokretanje LXTerminala kao root.</message>
+ <message xml:lang="hu">A LXTerminal rendszergazdai futtatásához hitelesítés szükséges.</message>
+ <message xml:lang="is">Auðkenningar er krafist til að keyra LXTerminal sem kerfisstjóri (root)</message>
+ <message xml:lang="it">Per eseguire LXTerminal come amministratore è richiesta l'autenticazione</message>
+ <message xml:lang="ja">root で LXTerminal を起動するには認証が必要です。</message>
+ <message xml:lang="kk">LXTerminal-ды әкімші ретінде орындау үшін аутентификация керек.</message>
+ <message xml:lang="ko">Root 권한으로 LXTerminal를 작동하려면 인증이 필요합니다.</message>
+ <message xml:lang="lt">LXTerminal vykdymui administratoriaus teisėmis, reikalingas tapatybės nustatymas.</message>
+ <message xml:lang="ms">Pengesahihan diperlukan untuk jalankan LXTerminal sebagai root.</message>
+ <message xml:lang="nb">Identitetsbekreftelse kreves for å kjøre LXTerminal som root.</message>
+ <message xml:lang="nl">Authenticatie is vereist om LXTerminal met rootbevoegdheid te draaien.</message>
+ <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uruchomić program LXTerminal w trybie administratora.</message>
+ <message xml:lang="pt">Autenticação necessária para executar LXTerminal como root.</message>
+ <message xml:lang="pt_BR">Autenticação é requerida para rodar LXTerminal como superusuário.</message>
+ <message xml:lang="ro">Pentru a porni LXTerminal ca root este nevoie de autentificare.</message>
+ <message xml:lang="ru">Требуется аутентификация для запуска LXTerminal от суперпользователя</message>
+ <message xml:lang="sk">Na spustenie LXTerminalu ako root je potrebná autentifikácia.</message>
+ <message xml:lang="sr">Потребна је потврда овлашћења ради покретања Тунара под кореним овлашћењима</message>
+ <message xml:lang="th">ต้องยืนยันตัวบุคคลก่อนเรียกทำงาน LXTerminal ในฐานะ root</message>
+ <message xml:lang="tr">LXTerminal'ı root olarak çalıştırmak için kimlik doğrulaması gereklidir</message>
+ <message xml:lang="uk">Вимагається розпізнавання для запуску LXTerminal з правами суперкористувача.</message>
+ <message xml:lang="zh_CN">以 root 身份运行 LXTerminal 需要进行身份验证。</message>
+ <message xml:lang="zh_TW">要以 root 身份執行 LXTerminal 需要認證。</message>
+ <defaults>
+ <allow_any>no</allow_any>
+ <allow_inactive>auth_admin</allow_inactive>
+ <allow_active>auth_admin</allow_active>
+ </defaults>
+ <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/lxterminal</annotate>
+ <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+ </action>
+
+</policyconfig>

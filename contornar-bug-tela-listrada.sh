@@ -44,7 +44,12 @@ echo "       Índice correspondente no menu do GRUB: ${indice}."
 
 install -m 644 systemd/le-nextboot-* /etc/systemd/system
 
-systemctl enable le-nextboot-poweroff@${indice}
+cat > /etc/le-nextboot.conf << EOF
+LE_NEXTBOOT_ENABLE=true
+LE_NEXTBOOT_INDEX=${indice}
+EOF
+
+systemctl enable le-nextboot-poweroff.service
 grub-reboot ${indice}
 
 mount ${particao} /mnt

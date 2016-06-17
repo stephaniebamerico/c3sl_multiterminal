@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>Leafpad</vendor>
+  <vendor_url>http://lxde.org/</vendor_url>
+
+  <action id="org.lxde.leafpad">
+    <message>Authentication is required to run Leafpad as root</message>
+    <message xml:lang="de">Legitimierung wird benötigt, um Leafpad als Systemverwalter zu starten.</message>
+    <message xml:lang="es">Para ejecutar Leafpad con permisos administrativos necesita autenticarse</message>
+    <message xml:lang="fi">Tunnistautuminen vaaditaan, jotta Leafpad voidaan ajaa pääkäyttäjänä</message>
+    <message xml:lang="fr">Une authentification est requise pour exécuter Leafpad en tant que root</message>
+    <message xml:lang="gl">Requírese autenticación para executar Leafpad como superusuario</message>
+    <message xml:lang="hu">Hitelesítés szükséges a Leafpad root-ként való futtatásához</message>
+    <message xml:lang="is">Auðkenningar er krafist til að keyra Leafpad sem root</message>
+    <message xml:lang="lt">Norint vykdyti Leafpad kaip root, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ml">മൗസ്പാഡ് റൂട്ടായി പ്രവര്‍ത്തിപ്പിക്കാന്‍ ആധികാരികത ആവശ്യമാണ്</message>
+    <message xml:lang="nl">Authenticatie is vereist om te werken met Leafpad als root</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uruchomić Leafpad w trybie administratora</message>
+    <message xml:lang="pt">É necessário autenticação para executar o Leafpad como root</message>
+    <message xml:lang="ru">Требуется идентификация, чтобы запустить Leafpad от имени суперпользователя</message>
+    <message xml:lang="sr">Потврђивање идентитета је потребно за администраторско покретање табле миша</message>
+    <message xml:lang="tr">Leafpad'i kök kullanıcı olarak çalıştırmak için yetkilendirme gerekli</message>
+    <icon_name>leafpad</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/leafpad</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+
+</policyconfig>

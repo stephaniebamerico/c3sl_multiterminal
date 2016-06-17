@@ -1,0 +1,17 @@
+#!/bin/sh
+
+tries=10
+export DISPLAY=${1}
+shift
+
+# This is a workaround for the case Xephyr is started before host Xorg
+# server is ready for connections, despite the socket activation.
+for i in $(seq ${tries})
+do
+  if xset q >/dev/null 2>&1
+  then
+    exec Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 ${@}
+  fi
+done
+
+exit 1

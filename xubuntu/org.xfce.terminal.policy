@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+  
+
+ <vendor>Terminal</vendor>
+ <vendor_url>http://xfce.org/</vendor_url>
+ <icon_name>utilities-terminal</icon_name>
+
+
+ <action id="org.xfce.terminal">
+ 
+ <description>Run Terminal as root</description>
+ <description xml:lang="ar">شغل ثونار كجذر</description>
+ <description xml:lang="ast">Executar Terminal como root</description>
+ <description xml:lang="bg">Стартирай Terminal като администратор</description>
+ <description xml:lang="cs">Spustit Terminal jako root</description>
+ <description xml:lang="da">Kør Terminal med rodrettigheder</description>
+ <description xml:lang="de">Terminal als Systemverwalter starten</description>
+ <description xml:lang="el">Εκτέλεση Terminal ως διαχειριστής</description>
+ <description xml:lang="en_AU">Run Terminal as root</description>
+ <description xml:lang="es">Iniciar Terminal como superusuario</description>
+ <description xml:lang="fi">Käynnistä Terminal pääkäyttäjän oikeuksin.</description>
+ <description xml:lang="fr">Lancer Terminal en tant que root</description>
+ <description xml:lang="gl">Executar Terminal como administrador</description>
+ <description xml:lang="he">הרץ את Terminal בתור שורש</description>
+ <description xml:lang="hr">Pokreni Terminal kao root korisnik</description>
+ <description xml:lang="hu">Terminal futtatása rendszergazdaként</description>
+ <description xml:lang="is">Keyra Terminal sem kerfisstjóri (root)</description>
+ <description xml:lang="it">Esegui Terminal come amministratore</description>
+ <description xml:lang="ja">root で Terminal を起動</description>
+ <description xml:lang="kk">Terminal-ды әкімші ретінде орындау</description>
+ <description xml:lang="ko">Root 권한으로 Terminal 작동</description>
+ <description xml:lang="lt">Vykdyti Terminal administratoriaus teisėmis</description>
+ <description xml:lang="ms">Jalankan Terminal sebagai root</description>
+ <description xml:lang="nb">Kjør Terminal som root</description>
+ <description xml:lang="nl">Terminal draaien met rootbevoegdheid</description>
+ <description xml:lang="pl">Uruchom Terminal jako root</description>
+ <description xml:lang="pt">Executar Terminal como root</description>
+ <description xml:lang="pt_BR">Rodar Terminal como superusuário</description>
+ <description xml:lang="ro">Pornește Terminal ca root</description>
+ <description xml:lang="ru">Запустить Terminal от суперпользователя</description>
+ <description xml:lang="sk">Spustiť Terminal ako root</description>
+ <description xml:lang="sr">Покрени Тунара са кореним овлашћењима</description>
+ <description xml:lang="th">เรียกทำงาน Terminal ในฐานะ root</description>
+ <description xml:lang="tr">Terminal'ı root olarak çalıştır</description>
+ <description xml:lang="uk">Запустити Terminal з правами суперкористувача</description>
+ <description xml:lang="zh_CN">以 root 身份运行 Terminal</description>
+ <description xml:lang="zh_TW">以 root 身份執行 Terminal</description>
+ <message>Authentication is required to run Terminal as root.</message>
+ <message xml:lang="ast">Ríquese l'autenticación pa executar Terminal como root.</message>
+ <message xml:lang="bg">Изисква се удостоверяване за да стартирате Terminal като администратор</message>
+ <message xml:lang="cs">Pro spuštění aplikace Terminal jako root se vyžaduje autentizace.</message>
+ <message xml:lang="da">Der kræves godkendelse for at køre Terminal som root.</message>
+ <message xml:lang="de">Legitimierung wird benötigt, um Terminal als Systemverwalter zu starten.</message>
+ <message xml:lang="el">Απαιτείται πιστοποίηση για εκτέλεση του Terminal ως διαχειριστής.</message>
+ <message xml:lang="en_AU">Authentication is required to run Terminal as root.</message>
+ <message xml:lang="es">Es necesario autentificarse para iniciar Terminal como superusuario.</message>
+ <message xml:lang="fi">Jotta Terminal voidaan käynnistää pääkäyttäjän oikeuksin, todennus tarvitaan.</message>
+ <message xml:lang="fr">Une authentification est requise pour lancer Terminal en tant que root.</message>
+ <message xml:lang="gl">Requírese autenticación para executar Terminal como administrador</message>
+ <message xml:lang="he">נדרש אימות כדי להריץ את Terminal בתור שורש.</message>
+ <message xml:lang="hr">Potrebna je provjera za pokretanje Terminala kao root.</message>
+ <message xml:lang="hu">A Terminal rendszergazdai futtatásához hitelesítés szükséges.</message>
+ <message xml:lang="is">Auðkenningar er krafist til að keyra Terminal sem kerfisstjóri (root)</message>
+ <message xml:lang="it">Per eseguire Terminal come amministratore è richiesta l'autenticazione</message>
+ <message xml:lang="ja">root で Terminal を起動するには認証が必要です。</message>
+ <message xml:lang="kk">Terminal-ды әкімші ретінде орындау үшін аутентификация керек.</message>
+ <message xml:lang="ko">Root 권한으로 Terminal를 작동하려면 인증이 필요합니다.</message>
+ <message xml:lang="lt">Terminal vykdymui administratoriaus teisėmis, reikalingas tapatybės nustatymas.</message>
+ <message xml:lang="ms">Pengesahihan diperlukan untuk jalankan Terminal sebagai root.</message>
+ <message xml:lang="nb">Identitetsbekreftelse kreves for å kjøre Terminal som root.</message>
+ <message xml:lang="nl">Authenticatie is vereist om Terminal met rootbevoegdheid te draaien.</message>
+ <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby uruchomić program Terminal w trybie administratora.</message>
+ <message xml:lang="pt">Autenticação necessária para executar Terminal como root.</message>
+ <message xml:lang="pt_BR">Autenticação é requerida para rodar Terminal como superusuário.</message>
+ <message xml:lang="ro">Pentru a porni Terminal ca root este nevoie de autentificare.</message>
+ <message xml:lang="ru">Требуется аутентификация для запуска Terminal от суперпользователя</message>
+ <message xml:lang="sk">Na spustenie Terminalu ako root je potrebná autentifikácia.</message>
+ <message xml:lang="sr">Потребна је потврда овлашћења ради покретања Тунара под кореним овлашћењима</message>
+ <message xml:lang="th">ต้องยืนยันตัวบุคคลก่อนเรียกทำงาน Terminal ในฐานะ root</message>
+ <message xml:lang="tr">Terminal'ı root olarak çalıştırmak için kimlik doğrulaması gereklidir</message>
+ <message xml:lang="uk">Вимагається розпізнавання для запуску Terminal з правами суперкористувача.</message>
+ <message xml:lang="zh_CN">以 root 身份运行 Terminal 需要进行身份验证。</message>
+ <message xml:lang="zh_TW">要以 root 身份執行 Terminal 需要認證。</message>
+ <defaults>
+ <allow_any>no</allow_any>
+ <allow_inactive>auth_admin</allow_inactive>
+ <allow_active>auth_admin</allow_active>
+ </defaults>
+ <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/xfce4-terminal</annotate>
+ <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+ </action>
+
+</policyconfig>

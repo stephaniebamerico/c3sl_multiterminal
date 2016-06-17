@@ -30,7 +30,7 @@ shift
 while read -r line
 do
     address=$(echo "${line}" | awk '{ sub(/\./, ":", $1) } { print $1 }')
-    echo TN502_ADDRESS_${index} = ${address}
+    echo VIDEO_ADDRESS_${index} = ${address}
 
     for xorgconf in "${@}"
     do

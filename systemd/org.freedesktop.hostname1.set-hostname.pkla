@@ -1,0 +1,6 @@
+[Allow systemd-networkd to set transient hostname from DHCP]
+Identity=unix-user:systemd-network
+Action=org.freedesktop.hostname1.set-hostname
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes

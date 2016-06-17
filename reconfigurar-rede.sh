@@ -1,6 +1,10 @@
 #!/bin/bash
 
 install -m 644 systemd/cabeada.network /etc/systemd/network
+install -m 644 systemd/*.pkla /etc/polkit-1/localauthority/50-local.d
+
+install -m 644 autostart-disable-nm/*.desktop /home/freezetemplate/.config/autostart
+chown -R freezetemplate:freezetemplate /home/freezetemplate/.config/autostart
 
 if [ -n "${wifi_iface}" ]
 then

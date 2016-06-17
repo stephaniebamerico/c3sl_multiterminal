@@ -2,6 +2,6 @@
 Description=Service for Xorg server at display :90
 
 [Service]
-ExecStartPre=/usr/local/bin/update-xorg-conf SM501 /etc/X11/xorg.conf.d/99-proinfo-urbano.conf /etc/X11/xorg.conf.d/99-proinfo-rural.conf
+ExecStartPre=/usr/local/bin/update-xorg-conf Silicon.Motion /etc/X11/xorg.conf.d/98-proinfo-urbano.conf /etc/X11/xorg.conf.d/98-proinfo-rural.conf
 ExecStart=/usr/local/bin/xorg-daemon :90
 SuccessExitStatus=0 1
