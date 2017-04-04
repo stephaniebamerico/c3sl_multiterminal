@@ -3,8 +3,8 @@
 case "${1}" in
     *1) seat_id=seat-V0 ;;
     *2) seat_id=seat-L0 ;;
-    *3) [ $(lspci | grep -c SM501) -gt 1 ] && seat_id=seat-V1 ;;
-    *4) [ $(lspci | grep -c SM501) -gt 1 ] && seat_id=seat-L1 ;;
+    *3) [ $(lspci | grep -c "Silicon.Motion") -gt 1 ] && seat_id=seat-V1 ;;
+    *4) [ $(lspci | grep -c "Silicon.Motion") -gt 1 ] && seat_id=seat-L1 ;;
 esac
 
 [ -n "${seat_id}" ] && loginctl attach ${seat_id} /sys/${1}

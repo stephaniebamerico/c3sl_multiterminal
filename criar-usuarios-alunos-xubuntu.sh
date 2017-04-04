@@ -27,8 +27,6 @@ install -m 644 autostart-disable/*.desktop /home/freezetemplate/.config/autostar
 
 install -d /home/freezetemplate/.config/Thunar
 install -m 644 xubuntu/uca.xml /home/freezetemplate/.config/Thunar
-
-mkdir -m 0777 /var/freeze-data
-ln -s /var/freeze-data "/home/freezetemplate/SALVAR AQUI!"
-
 chown -R freezetemplate:freezetemplate /home/freezetemplate
+
+mkdir -pm 0777 /var/freeze-data/{documents,pictures,music,videos}

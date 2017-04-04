@@ -12,7 +12,7 @@ install -m 755 xorg-daemon /usr/local/bin
 install -d /etc/xdg/lightdm/lightdm.conf.d
 install -m 644 lightdm/9[5679]*.conf /etc/xdg/lightdm/lightdm.conf.d
 
-update-xorg-conf SM501 /etc/X11/xorg.conf.d/98-proinfo-*.conf
+update-xorg-conf "Silicon.Motion" /etc/X11/xorg.conf.d/98-proinfo-*.conf
 systemctl enable xorg-daemon.socket
 systemctl start xorg-daemon.socket
 
