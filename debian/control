@@ -1,0 +1,13 @@
+Source: le-multiterminal
+Section: admin
+Priority: important
+Maintainer: C3SL <contato@c3sl.ufpr.br>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.8
+Vcs-Git: https://gitlab.c3sl.ufpr.br/le6/le-multiterminal
+
+Package: le-multiterminal
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Install multiterminal plataform
+ Divide the gpu in three heads, which are independent and have their own monitor, mouse, keyboard and sound system.
