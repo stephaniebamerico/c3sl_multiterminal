@@ -1,0 +1,55 @@
+## Template para empacotamento utilizando o Gitlab-ci.
+stages:
+    - build
+    - test
+    - deploy
+build:
+  stage: build
+  artifacts:
+    paths:
+      - build/
+  tags:
+    - regular
+    - debian
+    - build
+  script:
+    - if [ ! -d "package/debian/" ] ; then exit 1; fi
+    # TODO: find a way to get the dependencies automatically
+    - apt-get update && apt-get install -y build-essential devscripts dh-make dh-systemd quilt debhelper
+    - LINE=$(head -n 1 package/debian/changelog)
+    - PACKAGE=$(echo $LINE | cut -d' ' -f1)
+    - VERSION=$(echo $LINE | cut -d' ' -f2 | grep -o -E '[0-9]*\.[0-9]*\.[0-9]*')
+    - tar --exclude=debian -czf ${PACKAGE}_${VERSION}.orig.tar.gz package/*
+    - cd package ; debuild -us -uc
+    - cd ../
+    - mkdir build/
+    - mv ${PACKAGE}* build/
+    - echo "Estágio de Build finalizado."
+test:
+  stage: test
+  tags:
+    - ubuntu
+    - debootstrap
+  script:
+    # TODO: find a way to get the dependencies automatically
+    #- apt-get update && apt-get install -y plank gnome-shell numix-gtk-theme galternatives gnome-shell-extensions gsettings-desktop-schemas
+    - dpkg -i build/*.deb
+    - echo "Estágio de Teste finalizado"
+  dependencies:
+    - build
+deploy:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - ubuntu
+    - regular
+  script:
+    - echo "Estágio de Deploy"
+    - apt-get update && apt-get install -y dput ssh
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$PRIV_KEY")
+    - dput -u -f --config=dput.cf repo build/*.changes
+    - echo "Estágio de Deploy finalizado"
+  dependencies:
+    - build

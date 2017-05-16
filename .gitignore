@@ -1,0 +1,14 @@
+package/debian/le-multiterminal
+package/debian/le-multiterminal.debhelper.log
+package/debian/le-multiterminal.substvars
+package/debian/le-multiterminal.*.debhelper
+package/debian/files
+package/debian/debhelper-build-stamp
+le-multiterminal_*.tar.xz
+le-multiterminal_*.build
+le-multiterminal_*.dsc
+le-multiterminal_*.changes
+le-multiterminal_*.deb
+.gitlab-ci.yml~
+dput.cf~
+.gitignore~
