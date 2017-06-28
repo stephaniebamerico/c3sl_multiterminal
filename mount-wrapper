@@ -23,14 +23,51 @@
 # On Debian GNU/Linux systems, the complete text of the GNU General
 # Public License can be found in `/usr/share/common-licenses/GPL'.
 ###########################################################################
-for arg in "${@}"
+options=()
+user=${1}
+HOME=/home/${user}
+shift
+
+source ${HOME}/.config/user-dirs.dirs
+
+while [ ${1} ]
 do
-    case "${arg}" in
+  case "${1}" in
     -toverlay)
-        mkdir ${!#}/{upper,work}
-        chown $(stat -c '%U:%G' ${!#}) ${!#}/{upper,work}
-        ;;
-    esac
+      mkdir ${!#}/{upper,work}
+      chown $(stat -c '%U:%G' ${!#}) ${!#}/{upper,work}
+      options+=("${1}")
+    ;;
+    @DESKTOP@)
+      options+=("${XDG_DESKTOP_DIR}")
+    ;;
+    @DOCUMENTS@)
+      options+=("${XDG_DOCUMENTS_DIR}")
+    ;;
+    @DOWNLOAD@)
+      options+=("${XDG_DOWNLOAD_DIR}")
+    ;;
+    @PICTURES@)
+      options+=("${XDG_PICTURES_DIR}")
+    ;;
+    @PUBLICSHARE@)
+      options+=("${XDG_PUBLICSHARE_DIR}")
+    ;;
+    @MUSIC@)
+      options+=("${XDG_MUSIC_DIR}")
+    ;;
+    @TEMPLATES@)
+      options+=("${XDG_TEMPLATES_DIR}")
+    ;;
+    @VIDEOS@)
+      options+=("${XDG_VIDEOS_DIR}")
+    ;;
+    *)
+      options+=("${1}")
+    ;;
+  esac
+
+  shift
 done
 
-exec mount "${@}"
+exec mount "${options[@]}"

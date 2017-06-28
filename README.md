@@ -1,6 +1,8 @@
 # Configuração do Ubuntu 16.04 LTS para computadores multiterminais do ProInfo
 
-**Aqui você encontra apenas algumas informações resumidas sobre este roteiro. A documentação completa está disponível em nosso [wiki](../../wikis/home).**
+**URGENTE: seu multiterminal parou de funcionar após uma atualização de sistema? Leia [isto](../../wikis/problemas-com-atualizacoes-de-sistema)!**
+
+*Aqui você encontra apenas algumas informações resumidas sobre este roteiro. A documentação completa está disponível em nosso [wiki](../../wikis/home).*
 
 ## Pregões contemplados por esta solução
 
@@ -15,7 +17,7 @@
 
 ### Observações
 
-* É possível que esta solução se aplique também aos computadores do pregão 23/2012, mas nós não tivemos ainda a oportunidade de testá-la, pois não temos equipamentos deste pregão em nenhuma escola municipal de Mogi das Cruzes.
+* Esta solução não se aplica aos computadores do pregão 23/2012, devido à falta de um driver de vídeo compatível com as placas TN-750.
 * Esta solução pode aplicar-se a outros pregões do ProInfo Rural, **desde que a placa de vídeo original ATI Rage XL Quad seja substituída por um par de placas TN-502 Dual ou uma placa TN-502 Quad**.
 
 ## Sabores do Ubuntu recomendados para os computadores do ProInfo
@@ -24,9 +26,9 @@ Os sabores e arquiteturas do Ubuntu que nós recomendamos para os computadores d
 
 | Tipo de computador                            | Sabor do Ubuntu                                                                                                                                                                                             | Arquitetura |
 |:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------:|
-| multiterminal com menos de 2GB de memória RAM | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-i386.iso) ou [Lubuntu](http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04-desktop-i386.iso)   | 32 bits     |
-| multiterminal com 2GB de memória RAM ou mais  | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-amd64.iso) ou [Lubuntu](http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04-desktop-amd64.iso) | 64 bits     |
-| servidor                                      | [Ubuntu MATE](http://cdimage.ubuntu.com/ubuntu-mate/releases/xenial/release/ubuntu-mate-16.04-desktop-amd64.iso)                                                                                            | 64 bits     |
+| multiterminal com menos de 2GB de memória RAM (4GB para até 5 terminais) | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-i386.iso) ou [Lubuntu](http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04-desktop-i386.iso)   | 32 bits     |
+| multiterminal com 2GB de memória RAM (para até 3 terminais) ou mais  | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-amd64.iso) ou [Lubuntu](http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04-desktop-amd64.iso) | 64 bits     |
+| servidor                                      | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-amd64.iso) ou [Ubuntu MATE](http://cdimage.ubuntu.com/ubuntu-mate/releases/xenial/release/ubuntu-mate-16.04-desktop-amd64.iso)                                                                                            | 64 bits     |
 
 ## Resumo do roteiro
 
@@ -42,7 +44,7 @@ Os sabores e arquiteturas do Ubuntu que nós recomendamos para os computadores d
 
 Caso algum de seus computadores seja afetado pelo [bug da tela listrada](../../wikis/O-bug-da-tela-listrada), os seguintes passos adicionais são necessários para utilizá-lo em sua capacidade máxima (3 terminais no ProInfo Urbano e 4~5 terminais no ProInfo Rural):
 
-1. Instale o Linux Educacional 5.0 a partir da ISO disponível na [página de suporte do Paraná Digital](http://www.prdsuporte.seed.pr.gov.br/uploads/Linux-Educacional_5.0.2-1-escola-le5-stable-i386-20150817.iso), seguindo [este roteiro](wikis/Instalacao-do-Linux-Educacional-5-0).
-2. Configure o multiterminal no LE 5.0 seguindo [este roteiro](wikis/Configuracao-do-multiterminal-no-Linux-Educacional-5-0). **Não é necessário completar a associação de teclados/mouses, tampouco ativar a licença do Userful Multiseat**.
-3. Reinicie o computador de volta para o Ubuntu 16.04 LTS e execute o script `contornar-bug-tela-listrada.sh` que consta desta solução.
+1. Baixe a ISO para recuperação do vídeo, disponível no nosso [Google Drive](https://drive.google.com/open?id=0B_0RrXAKZ1hbdnRvcGRuSFc2Nkk).
+2. Mova a ISO baixada para a pasta `/boot/userful-rescue`.
+3. Execute o script `contornar-bug-tela-listrada.sh` que consta desta solução.
 4. Desligue e ligue novamente o computador.

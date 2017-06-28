@@ -21,26 +21,36 @@
 # Não executar este script para o próprio usuário freezetemplate
 [ "${USER}" = "freezetemplate" ] && exit 0
 
+# Remove arquivos do diretorio ~/.cache 
 [ "$(ls -A ${HOME}/.cache)" ] && rm -rf ${HOME}/.cache/*
+
+# Remove arquivos "temporario" das coisas do mozilla
 find ${HOME}/.mozilla -type f -name secmod.db -delete
 
+# Remove arquivos de erro do X e log da sessão do xfce
 for i in ${HOME}/.xfce4-session.verbose-log* \
          ${HOME}/.xsession-errors*
 do
     [ -f ${i} ] && rm ${i}
 done
 
+# Substitui as referencias à "/home/freezetemplate" por ${HOME} do usuário em questão, nos arquivos de configuração abaixo
 for i in ${HOME}/.pki/nssdb/pkcs11.txt \
          ${HOME}/.config/gtk-3.0/bookmarks \
          ${HOME}/.config/vlc/vlc-qt-interface.conf \
          ${HOME}/.config/chromium/Default/Preferences \
          ${HOME}/.config/xfce4/desktop/icons.screen*.rc
 do
+    # -f: se existe   -i: muda o proprio arquivo     s: substitui /home/freezetemplate por ${HOME} em g: todas as ocorrências  no arquivo ${i}
     [ -f ${i} ] && sed -i -e "s@/home/freezetemplate@${HOME}@g" ${i}
 done
 
+# Substitui refererncias ao usuario freezetemplate por ${USER} nos arquivos do wine
 for i in ${HOME}/.wine/userdef.reg \
          ${HOME}/.wine/user.reg
 do
     [ -f ${i} ] && sed -i -e "s@freezetemplate@${USER}@g" ${i}
 done
+
+# Destrava a senha do usuario
+python -c "import gnomekeyring; gnomekeyring.unlock_sync(None, 'freeze')"
