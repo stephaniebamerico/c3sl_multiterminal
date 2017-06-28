@@ -4,13 +4,18 @@ tries=10
 export DISPLAY=${1}
 shift
 
+# We've found that latest Xephyr may segfault on 64-bit systems
+# if XVideo extension is enabled.
+[ "$(uname -i)" = "x86_64" ] && no_xv="-noxv"
+
 # This is a workaround for the case Xephyr is started before host Xorg
 # server is ready for connections, despite the socket activation.
+# tenta 10 vezes. se nao der, nao deu
 for i in $(seq ${tries})
 do
   if xset q >/dev/null 2>&1
   then
-    exec Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 ${@}
+    exec Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 ${no_xv} ${@}
   fi
 done
 
