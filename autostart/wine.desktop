@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=WINE desktop startup
-TryExec=wine
-Exec=wine explorer.exe /desktop
