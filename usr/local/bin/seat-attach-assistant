@@ -1,10 +1,9 @@
 #!/bin/sh
 
-case "${1}" in
-    *1) seat_id=seat-V0 ;;
-    *2) seat_id=seat-L0 ;;
-    *3) [ $(lspci | grep -c "Silicon.Motion") -gt 1 ] && seat_id=seat-V1 ;;
-    *4) [ $(lspci | grep -c "Silicon.Motion") -gt 1 ] && seat_id=seat-L1 ;;
-esac
+#Add some sanity tests
+#keep log somewhere
 
-[ -n "${seat_id}" ] && loginctl attach ${seat_id} /sys/${1}
+devpath=$1
+seat_id=seat-$2
+
+loginctl attach ${seat_id} /sys/${devpath}
