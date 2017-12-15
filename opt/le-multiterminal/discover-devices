@@ -23,6 +23,11 @@
 # For input devices, it uses /proc/bus/input/devices
 # For video cardes, it uses the "discover" package.
 
+<<<<<<< HEAD
+=======
+# TODO: find a decent way to do all this.
+
+>>>>>>> f2bed6673c6e31075587f1e43c5fb606dbc48f78
 DISCOVER=/sbin/discover
 
 # This function prints the physical addresses of the mice found

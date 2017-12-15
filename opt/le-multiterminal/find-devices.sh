@@ -70,20 +70,13 @@ find_keyboard () {
 
 		# Write in configuration file
 		if [[ $fKey -gt 1 ]]; then
-			echo "$wNum : ${OUTPUTS[$((wNum-1))]}"
 			echo -e "[Seat:$SEAT_NAME]\nxserver-command=xephyr-wrapper :90.0 -output ${OUTPUTS[$((wNum-1))]}\n" >> configuracao
 		fi
-
-		echo "*************** SAINDO"
 
 		exit 1
 	else
 		echo "CAN NOT FIND KEYBOARD"
 
-		echo "*************** SAINDO"
-
 		exit 0
 	fi
-
-	echo "*************** SAINDO"
 }

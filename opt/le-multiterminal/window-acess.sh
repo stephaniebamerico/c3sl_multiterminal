@@ -47,7 +47,6 @@ create_window () {
 	# Creates a new window for writing on this output
 	WINDOW_NAME=w$(($WINDOW_COUNTER+1))
 	$NEW_WINDOW $SCREEN_RESOLUTION+0+0 $WINDOW_NAME &
-	#sleep 1
 
 	# Try to access the window
 	xwininfo -name $WINDOW_NAME

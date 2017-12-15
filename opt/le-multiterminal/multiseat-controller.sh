@@ -152,4 +152,5 @@ done
 # Cleans the system by killing all the processes and files it has created
 kill_jobs
 
+
 exit 0
