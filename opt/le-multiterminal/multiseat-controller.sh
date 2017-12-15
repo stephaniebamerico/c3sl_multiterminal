@@ -67,7 +67,6 @@ create_onboard_window () {
 		export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
 
 		Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} &
-		sleep 1 # TODO
 
 		$CREATE_WINDOW
 		
@@ -88,7 +87,6 @@ create_secundarycard_windows () {
 
 		# Run Xephyr to type in this output
 		Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $i -noxv &
-		sleep 2 # TODO
 
 		# Export display and create a window to write on this output
 		export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
@@ -125,7 +123,8 @@ kill_jobs () {
 ### TODO: Serviços que precisam rodar ANTES desse script 
 systemctl stop lightdm
 Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &
-sleep 2
+sleep 1
+rm -f configuracao
 ### TO-DO end
 
 ############ BEGIN ############
@@ -154,6 +153,3 @@ done
 kill_jobs
 
 exit 0
-
-
-#loginctl seat-status seat-V0 | grep $(echo "/sys/devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.2/1-1.2.2/1-1.2.2:1.0/0003:04B3:310C.0008/input/input10" | rev | cut -d "/" -f1 | rev)

@@ -2,6 +2,7 @@
 
 ## Script/function constants
 READ_DEVICES=read-devices
+DETECT_KEYBOARDS=detect-keyboard.sh
 WRITE_W=write_window
 DEVICES=devices
 declare -a SEATS_LISTED # save the name of the existing seats
@@ -15,7 +16,7 @@ find_keyboard () {
 
 	CREATED=0
 	while (( ! CREATED )); do
-		KEYBOARDS=$(discover-devices kevdev | cut -f2)
+		KEYBOARDS=$($DETECT_KEYBOARDS)
 
 		for i in `ls $MDM_DEVICES | grep "\<keyboard"`; do
 			KEYBOARDS=$(sed "s#$i##g" <<< $KEYBOARDS)
@@ -67,16 +68,22 @@ find_keyboard () {
 
 		$WRITE_W ok $wNum
 
-		# TODO: escrever no arquivo
+		# Write in configuration file
 		if [[ $fKey -gt 1 ]]; then
 			echo "$wNum : ${OUTPUTS[$((wNum-1))]}"
 			echo -e "[Seat:$SEAT_NAME]\nxserver-command=xephyr-wrapper :90.0 -output ${OUTPUTS[$((wNum-1))]}\n" >> configuracao
 		fi
 
+		echo "*************** SAINDO"
+
 		exit 1
 	else
 		echo "CAN NOT FIND KEYBOARD"
 
+		echo "*************** SAINDO"
+
 		exit 0
 	fi
+
+	echo "*************** SAINDO"
 }
