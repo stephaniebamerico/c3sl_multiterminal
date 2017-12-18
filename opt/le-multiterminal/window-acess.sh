@@ -25,12 +25,21 @@
 #### Written by: Stephanie Briere Americo - sba16@c3sl.inf.ufpr.br on 2017.
 
 ## Script/function in other file 
-NEW_WINDOW="$MC3SL_SCRIPTS/seat-parent-window" #It receives as parameter <RESOLUTION>x<X_Initial>+<Y_Inicial>
-WRITE_MESSAGE="$MC3SL_SCRIPTS/write-message"
+NEW_WINDOW="seat-parent-window" # it receives as parameter <RESOLUTION>x<X_Initial>+<Y_Inicial>
+WRITE_MESSAGE="write-message" # it receives as parameter <ID_WINDOW> <Message>
 
 create_window () {
 	#### Description: Create a window in a specific display.
 	#### ID_WINDOWS and WINDOW_COUNTER are declared in "multiseat-controller.sh".
+
+	# Try to access Xorg
+	xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
+	EXIT_CODE=$?
+	while [[ $EXIT_CODE -ne 0 ]]; do 
+		sleep 0.5
+		xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
+		EXIT_CODE=$?
+	done
 	
 	# Get screen resolution
 	SCREEN_RESOLUTION=$(xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
@@ -38,15 +47,23 @@ create_window () {
 	# Creates a new window for writing on this output
 	WINDOW_NAME=w$(($WINDOW_COUNTER+1))
 	$NEW_WINDOW $SCREEN_RESOLUTION+0+0 $WINDOW_NAME &
-	sleep 1 #TODO
+
+	# Try to access the window
+	xwininfo -name $WINDOW_NAME
+	EXIT_CODE=$?
+	while [[ $EXIT_CODE -ne 0 ]]; do 
+		sleep 0.5
+		xwininfo -name $WINDOW_NAME
+		EXIT_CODE=$?
+	done
 
 	# Get the window id
 	ID_WINDOWS[$WINDOW_COUNTER]=$(xwininfo -name $WINDOW_NAME | grep "Window id" | cut -d ' ' -f4)
 
+	write_window wait_load $WINDOW_COUNTER
+	
 	# Increases the number of windows
 	WINDOW_COUNTER=$(($WINDOW_COUNTER+1))
-
-	write_window wait_load $WINDOW_COUNTER
 }
 
 write_window() {

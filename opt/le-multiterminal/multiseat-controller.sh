@@ -42,38 +42,79 @@ MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/
 
 ## Script/function in other file 
 DISCOVER_DEVICES="$MC3SL_SCRIPTS/discover-devices"
-FIND_KEYBOARD="$MC3SL_SCRIPTS/find_keyboard" # "find-devices.sh"
-CREATE_WINDOW="$MC3SL_SCRIPTS/create_window" # "window-acess.sh"
-WRITE_WINDOW="$MC3SL_SCRIPTS/write_window" # "window-acess.sh"
+FIND_KEYBOARD="find_keyboard" # "find-devices.sh"
+CREATE_WINDOW="create_window" # "window-acess.sh"
+WRITE_WINDOW="write_window" # "window-acess.sh"
 
 ## Macros
 FAKE_DISPLAY=:90 # display to access fake-seat (secondary card)
 OUTPUTS=("LVDS" "VGA") # output options
 
 ## Variables 
+WINDOW_ID_INIT=0 # if the onboard board, the start is 0; otherwise it is 1
 WINDOW_COUNTER=0 # how many windows were created
 N_SEATS_LISTED=0 # how many seats are there in the system
 ONBOARD=0 # if the onboard is connected
-declare -a DISPLAY_XORGS # saves the display of the Xorg processes launched
-declare -a ID_WINDOWS # save the created window ids (used in window-acess.sh)
+declare -a DISPLAY_XORGS # saves the display of the Xorg launched processes
+declare -a ID_WINDOWS # saves the created window ids (used in window-acess.sh)
+declare -a PID_FIND_DEVICES # saves the pid from the launched configuration processes
+
+create_onboard_window () {
+	# Checks if there is a device connected to the onboard card
+	if [ "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected" ]; then
+		# Runs Xorg and creates the window for the onboard card
+		DISPLAY_XORGS[$WINDOW_COUNTER]=:$(($WINDOW_COUNTER+10))
+		export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
+
+		Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} &
+
+		$CREATE_WINDOW
+		
+		ONBOARD=1
+	else
+		WINDOW_ID_INIT=1
+		WINDOW_COUNTER=1
+	fi
+}
+
+create_secundarycard_windows () {
+	# The fake_seat display needs to be exported to run the Xephyr that communicate with it
+	export DISPLAY=$FAKE_DISPLAY
+	
+	for i in ${OUTPUTS[*]}; do
+		# Display for each output
+		DISPLAY_XORGS[$WINDOW_COUNTER]=:$((WINDOW_COUNTER+10))
+
+		# Run Xephyr to type in this output
+		Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $i -noxv &
+
+		# Export display and create a window to write on this output
+		export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
+		$CREATE_WINDOW
+
+		# Again: the fake_seat display needs to be exported
+		export DISPLAY=$FAKE_DISPLAY
+	done
+}
 
 configure_devices () {
-	# Run configuration script for each seat
-	for WINDOW in `seq 0 $(($WINDOW_COUNTER-1))`; do
-		$FIND_KEYBOARD $(($WINDOW+1)) $ONBOARD &
+	COUNT=0
+	for WINDOW in `seq $WINDOW_ID_INIT $(($WINDOW_COUNTER-1))`; do
+		$FIND_KEYBOARD $(($WINDOW+1)) &
+		PID_FIND_DEVICES[$COUNT]=$!
+		COUNT=$(($COUNT+1))
 
 		$WRITE_WINDOW press_key $WINDOW
 	done
 }
 
-kill_processes () {
-	# Cleans the system by killing all the processes it has created
+kill_jobs () {
 	if [[ -n "$(ls | grep lock)" ]]; then
 		rm lock*
 	fi
 
 	if [[ -n "$(ls $MC3SL_DEVICES)" ]]; then
-		rm -f $MC3SL_DEVICES/*
+		rm -rf $MC3SL_DEVICES/
 	fi
 
 	pkill -P $$
@@ -82,60 +123,34 @@ kill_processes () {
 ### TODO: Serviços que precisam rodar ANTES desse script 
 systemctl stop lightdm
 Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &
-sleep 2
+sleep 1
+rm -f configuracao
 ### TO-DO end
 
 ############ BEGIN ############
 
-# Checks if there is a device connected to the onboard card
-if [ "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected" ]; then
-	# Runs Xorg and creates the window for the onboard card
-	DISPLAY_XORGS[$WINDOW_COUNTER]=:$(($WINDOW_COUNTER+10))
-	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
+# If the onboard is connected, it creates a window to write on the screen
+create_onboard_window
 
-	Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} &
-	sleep 1 # TODO
+# Creates the necessary windows to write on the screen of each output of the secondary card
+create_secundarycard_windows
 
-	$CREATE_WINDOW
-	
-	ONBOARD=1
-else
-	WINDOW_COUNTER=1
-fi
+# We'll use it to save a shortcut to devices that have already been paired
+mkdir -p $MC3SL_DEVICES
 
-# The fake_seat display needs to be exported to run the Xephyr that communicate with it
-export DISPLAY=$FAKE_DISPLAY
-
-for i in `seq 0 1`; do
-	# Display for each output
-	DISPLAY_XORGS[$WINDOW_COUNTER]=:$((WINDOW_COUNTER+10))
-
-	# Run Xephyr to type in this output
-	Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output ${OUTPUTS[$WINDOW_COUNTER]} -noxv &
-	sleep 2 # TODO
-
-	# Export display and create a window to write on this output
-	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
-	$CREATE_WINDOW
-
-	# Again: the fake_seat display needs to be exported
-	export DISPLAY=$FAKE_DISPLAY
-done
-
-#loginctl seat-status seat-V0 | grep $(echo "/sys/devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.2/1-1.2.2/1-1.2.2:1.0/0003:04B3:310C.0008/input/input10" | rev | cut -d "/" -f1 | rev)
-
+# Run configuration script for each seat 
 configure_devices
 
 # Wait until all seats are configured
 N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+$ONBOARD))
 CONFIGURED_SEATS=0
-while [[ $CONFIGURED_SEATS -le $N_SEATS_LISTED ]]; do
-    wait -n $PID_FIND_DEVICES
+while [[ $CONFIGURED_SEATS -lt $N_SEATS_LISTED ]]; do
+    wait -n ${PID_FIND_DEVICES[*]}
     CONFIGURED_SEATS=$(($CONFIGURED_SEATS+1))
 done
 
-kill_processes
+# Cleans the system by killing all the processes and files it has created
+kill_jobs
 
-#systemctl start lightdm
 
 exit 0
