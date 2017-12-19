@@ -27,9 +27,7 @@
 
 set -x
 
-#TODO: arrumar caminhos
-
-export PATH=$PATH:$(pwd)
+export PATH=$PATH:/opt/le-multiterminal 
 
 ## Auxiliary scripts
 source find-devices.sh
