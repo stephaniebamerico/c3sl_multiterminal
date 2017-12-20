@@ -1,0 +1,55 @@
+## Template para empacotamento utilizando o Gitlab-ci.
+
+stages:
+    - build
+    - test
+    - deploy
+
+build:
+  stage: build
+  artifacts:
+    paths:
+      - build/
+  tags:
+    - debian-packaging
+  script:
+    - apt-get update && apt-get install -y build-essential devscripts dh-make dh-systemd quilt
+    - ./.build.sh
+
+test:
+  stage: test
+  tags:
+    - ubuntu
+    - regular
+  script:
+    # TODO: find a way to get the dependencies automatically
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales
+    - locale-gen pt_BR.UTF-8
+    - export LANG=pt_BR.UTF-8
+    - DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb
+  dependencies:
+    - build
+
+deploy_for_testing:
+  stage: deploy
+  only:
+      - master
+  tags:
+    - debian-packaging
+  script:
+    - ./.deploy.sh
+  dependencies:
+    - build
+
+deploy_for_stable:
+  stage: deploy
+  when: manual
+  only:
+      - master
+  tags:
+    - debian-packaging
+  script:
+    - ./.deploy.sh
+  dependencies:
+    - build
+
