@@ -1,0 +1,4 @@
+Essa pasta foi criada automaticamente pelo le-multiterminal
+
+Para reconfigurar o multiterminal delete o arquivo "/etc/le-multiterminal/configurado"
+Os arquivos de log estão em "/var/log/le-multiterminal/"

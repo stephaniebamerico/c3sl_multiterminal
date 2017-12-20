@@ -1,0 +1,12 @@
+package/debian/le-conf
+package/debian/le-conf.debhelper.log
+package/debian/le-conf.substvars
+package/debian/le-conf.*.debhelper
+package/debian/files
+package/debian/debhelper-build-stamp
+le-conf_*.tar.xz
+le-conf_*.build
+le-conf_*.dsc
+le-conf_*.changes
+le-conf_*.deb
+build.sh
