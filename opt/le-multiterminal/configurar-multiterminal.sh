@@ -2,7 +2,7 @@
 
 cd ../../
 # Copia arquivos do X para systemd
-install -m 644 etc/systemd/system/xorg-daemon.s* /etc/systemd/system
+install -m 644 etc/systemd/system/* /etc/systemd/system
 # Copia configs de usb para o udev
 install -m 644 etc/udev/rules.d/* /etc/udev/rules.d
 
@@ -25,8 +25,16 @@ install -m 755 usr/local/bin/xephyr-wrapper /usr/local/bin
 install -d /etc/xdg/lightdm/lightdm.conf.d
 install -m 644 etc/xdg/lightdm/lightdm.conf.d/*.conf /etc/xdg/lightdm/lightdm.conf.d
 
+install -d /etc/le-multiterminal
+install -d /opt/le-multiterminal
+install -m 755 opt/le-multiterminal/* /opt/le-multiterminal
+
 # roda o script que atualiza as configs do xorg
 update-xorg-conf "Silicon.Motion" /etc/X11/xorg.conf.d/98-proinfo-*.conf
+
+systemctl daemon-reload
+systemctl enable le-multiterminal
+
 # habilita e roda o xorg-daemon
 systemctl enable xorg-daemon.socket
 systemctl start xorg-daemon.socket

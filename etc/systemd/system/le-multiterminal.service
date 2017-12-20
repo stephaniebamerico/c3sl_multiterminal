@@ -1,0 +1,14 @@
+[Unit]
+Description=Configuração do multiterminal
+Conflicts=getty@tty7.service plymouth-quit.service
+After=systemd-user-sessions.service getty@tty7.service plymouth-quit.service
+
+Before=lightdm.service
+
+[Service]
+Type=oneshot
+TimeoutSec=infinity
+ExecStart=/opt/le-multiterminal/multiterminal.sh
+
+[Install]
+WantedBy=graphical.target
