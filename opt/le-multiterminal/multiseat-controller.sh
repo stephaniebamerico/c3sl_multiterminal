@@ -27,13 +27,11 @@
 
 set -x
 
-#TODO: arrumar caminhos
-
-export PATH=$PATH:$(pwd)
+export PATH=$PATH:/opt/le-multiterminal
 
 ## Auxiliary scripts
-source find-devices.sh
-source window-acess.sh
+source /opt/le-multiterminal/find-devices.sh
+source /opt/le-multiterminal/window-acess.sh
 
 ## Path constants
 MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ 
@@ -120,14 +118,22 @@ kill_jobs () {
 	pkill -P $$
 }
 
-### TODO: Serviços que precisam rodar ANTES desse script 
-systemctl stop lightdm
-Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &
-sleep 1
-rm -f configuracao
-### TO-DO end
-
 ############ BEGIN ############
+
+Xorg $FAKE_DISPLAY -seat __fake-seat-1__ -dpms -s 0 -nocursor &
+pid=$!
+		
+xdpyinfo -display $FAKE_DISPLAY
+EXIT_CODE=$?
+while [[ $EXIT_CODE -ne 0 ]]; do 
+	sleep 0.5
+	xdpyinfo -display $FAKE_DISPLAY
+	EXIT_CODE=$?
+	if ! kill -0 "${pid}" >/dev/null 2>&1; then
+		Xorg $FAKE_DISPLAY -seat __fake-seat-1__ -dpms -s 0 -nocursor &
+		pid=$!
+	fi
+done
 
 # If the onboard is connected, it creates a window to write on the screen
 create_onboard_window
