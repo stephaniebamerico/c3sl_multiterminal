@@ -34,12 +34,11 @@ source /opt/le-multiterminal/find-devices.sh
 source /opt/le-multiterminal/window-acess.sh
 
 ## Path constants
-MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ 
-MC3SL_DEVICES=devices #/etc/mc3sl/devices/ 
-MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/ 
+MC3SL_DEVICES="/opt/le-multiterminal/devices" # shortcut to devices that have already been paired
+MC3SL_CONF="/opt/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
+LIGHTDM_CONF="/etc/xdg/lightdm/lightdm.conf.d/98-xephyr-multi-seat.conf"
 
-## Script/function in other file 
-DISCOVER_DEVICES="$MC3SL_SCRIPTS/discover-devices"
+## Script/function in other file
 FIND_KEYBOARD="find_keyboard" # "find-devices.sh"
 CREATE_WINDOW="create_window" # "window-acess.sh"
 WRITE_WINDOW="write_window" # "window-acess.sh"
@@ -182,8 +181,15 @@ N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+$ONBOARD))
 CONFIGURED_SEATS=0
 while [[ $CONFIGURED_SEATS -lt $N_SEATS_LISTED ]]; do
     wait -n ${PID_FIND_DEVICES[*]}
-    CONFIGURED_SEATS=$(($CONFIGURED_SEATS+1))
+    EXIT_CODE=$?
+    
+    if [[ $EXIT_CODE -eq 0 ]]; then
+		CONFIGURED_SEATS=$(($CONFIGURED_SEATS+1))
+	fi
 done
+
+# Move settings file created for lightdm folder
+mv -f $MC3SL_CONF $LIGHTDM_CONF
 
 # Cleans the system by killing all the processes and files it has created
 kill_jobs
