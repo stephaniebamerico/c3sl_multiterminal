@@ -1,10 +1,15 @@
 #!/bin/bash
 
-## Script/function constants
-READ_DEVICES=read-devices
-DETECT_KEYBOARDS=detect-keyboard.sh
-WRITE_W=write_window
-DEVICES=devices
+## Macros
+DEVICES="/opt/le-multiterminal/devices" # shortcut to devices that have already been paired
+CONF="/opt/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
+
+## Script/function in other file
+READ_DEVICES="read-devices"
+DETECT_KEYBOARDS="/opt/le-multiterminal/detect-keyboard.sh"
+WRITE_W="write_window" # "window-acess.sh"
+
+## Variables 
 declare -a SEATS_LISTED # save the name of the existing seats
 
 
@@ -70,13 +75,13 @@ find_keyboard () {
 
 		# Write in configuration file
 		if [[ $fKey -gt 1 ]]; then
-			echo -e "[Seat:$SEAT_NAME]\nxserver-command=xephyr-wrapper :90.0 -output ${OUTPUTS[$((wNum-1))]}\n" >> configuracao
+			echo -e "[Seat:$SEAT_NAME]\nxserver-command=xephyr-wrapper :90.0 -output ${OUTPUTS[$((wNum-1))]}\n" >> $CONF
 		fi
 
-		exit 1
+		exit 0
 	else
 		echo "CAN NOT FIND KEYBOARD"
 
-		exit 0
+		exit 1
 	fi
 }
