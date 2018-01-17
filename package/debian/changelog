@@ -1,3 +1,9 @@
+le-multiterminal (0.0.3) testing; urgency=medium
+
+  * Update ifs to the default used by c3sl (test command)
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Wed, 17 Jan 2018 11:47:50 -0200
+
 le-multiterminal (0.0.2) testing; urgency=medium
 
   * Check for scripting failure and abort with error
