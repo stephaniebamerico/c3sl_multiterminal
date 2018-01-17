@@ -1,3 +1,9 @@
+le-multiterminal (0.0.2) testing; urgency=medium
+
+  * Check for scripting failure and abort with error
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Wed, 17 Jan 2018 09:32:42 -0200
+
 le-multiterminal (0.0.1) testing; urgency=medium
 
   * Initial release
