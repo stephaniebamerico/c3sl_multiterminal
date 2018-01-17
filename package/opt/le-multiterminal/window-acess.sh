@@ -24,7 +24,7 @@
 #### There should already be an Xorg/Xephyr running in this display.
 #### Written by: Stephanie Briere Americo - sba16@c3sl.inf.ufpr.br on 2017.
 
-## Script/function in other file 
+## Script/function in other file
 NEW_WINDOW="seat-parent-window" # it receives as parameter <RESOLUTION>x<X_Initial>+<Y_Inicial>
 WRITE_MESSAGE="write-message" # it receives as parameter <ID_WINDOW> <Message>
 
@@ -35,12 +35,12 @@ create_window () {
 	# Try to access Xorg
 	xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
 	EXIT_CODE=$?
-	while [[ $EXIT_CODE -ne 0 ]]; do 
+	while test $EXIT_CODE -ne 0; do
 		sleep 0.5
 		xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
 		EXIT_CODE=$?
 	done
-	
+
 	# Get screen resolution
 	SCREEN_RESOLUTION=$(xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
 
@@ -51,7 +51,7 @@ create_window () {
 	# Try to access the window
 	xwininfo -name $WINDOW_NAME
 	EXIT_CODE=$?
-	while [[ $EXIT_CODE -ne 0 ]]; do 
+	while test $EXIT_CODE -ne 0; do
 		sleep 0.5
 		xwininfo -name $WINDOW_NAME
 		EXIT_CODE=$?
@@ -61,25 +61,25 @@ create_window () {
 	ID_WINDOWS[$WINDOW_COUNTER]=$(xwininfo -name $WINDOW_NAME | grep "Window id" | cut -d ' ' -f4)
 
 	write_window wait_load $WINDOW_COUNTER
-	
+
 	# Increases the number of windows
 	WINDOW_COUNTER=$(($WINDOW_COUNTER+1))
 }
 
 write_window() {
 	#### Description: Writes in a specific window on a particular display.
-	#### Parameters: $1 - message to be written; $2 - display to be used. 
+	#### Parameters: $1 - message to be written; $2 - display to be used.
 	#### DISPLAY_XORGS and ID_WINDOWS are declared in "multiseat-controller.sh".
-	
+
 	export DISPLAY=${DISPLAY_XORGS[$2]}
 	case $1 in
-		ok) 
+		ok)
 			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Monitor configurado, aguarde o restante ficar pronto" ;;
-		wait_load) 
+		wait_load)
 			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Aguarde" ;;
-		press_key) 
+		press_key)
 			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Pressione a tecla F$(($2+1))" ;;
-		press_mouse) 
+		press_mouse)
 			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Pressione o botão esquerdo do mouse" ;;
     esac
 }

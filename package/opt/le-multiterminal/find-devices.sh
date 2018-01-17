@@ -44,7 +44,7 @@ find_keyboard () {
 	SEATS_LISTED=(seat0 $(loginctl list-seats | grep seat-))
 
 	CREATED=0
-	while (( ! CREATED )); do
+	while test $CREATED -eq 0; do
 		KEYBOARDS=$($DETECT_KEYBOARDS)
 
 		# List all conected keyboards
@@ -53,7 +53,7 @@ find_keyboard () {
 		done
 
 		# If no keyboard is connected, you can not proceed
-		if [ -z "$KEYBOARDS" ]; then
+		if test -z "$KEYBOARDS"; then
 		    echo "[Error] No keyboards connected"
 		    exit 1
 		fi
@@ -62,12 +62,12 @@ find_keyboard () {
 		PRESSED=$($READ_DEVICES $fKey $KEYBOARDS | grep '^detect' | cut -d'|' -f2)
 
 		# If $READ_DEVICES gets killed the script won't do bad stuff
-		if [ -z "$PRESSED" ]; then
+		if test -z "$PRESSED"; then
 		    continue
 		fi
 
 		# If the key has not yet been processed, continue to wait
-		if [ "$PRESSED" = 'timeout' ]; then
+		if test "$PRESSED" = 'timeout'; then
 		    continue
 		fi
 
@@ -79,14 +79,14 @@ find_keyboard () {
 
 		# Check if there is no longer a link to this keyboard
 		for i in `ls $DEVICES | grep "\<keyboard"`; do
-		    if [ "$i" != "keyboard_$fKey" ]; then
-					AUX=$(stat -c %N $DEVICES/$i | cut -d '>' -f2 | cut -d "'" -f2)
+		    if test "$i" != "keyboard_$fKey"; then
+			AUX=$(stat -c %N $DEVICES/$i | cut -d '>' -f2 | cut -d "'" -f2)
 
-					if [ "$AUX" = "$PRESSED" ]; then
-			    	# Keyboard link already exists, try again
-			    	rm -f $DEVICES/keyboard_$fKey
-			    	CREATED=0
-					fi
+			if test "$AUX" = "$PRESSED"; then
+			# Keyboard link already exists, try again
+			rm -f $DEVICES/keyboard_$fKey
+			CREATED=0
+			fi
 		    fi
 		done
 	done
@@ -94,19 +94,19 @@ find_keyboard () {
 	# Find device address
 	SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
 
-	if [ -n "$SYS_DEV" ]; then
+	if test -n "$SYS_DEV"; then
 		# Now we know the seat/output
 		SEAT_NAME=$(udevadm info -p $SYS_DEV | grep ID_SEAT | cut -d '=' -f2)
 
 		# Sometimes the devices that belong to seat0 do not have ID_SEAT
-		if [ -z "$SEAT_NAME" ]; then
+		if test -z "$SEAT_NAME"; then
 		    SEAT_NAME=seat0
 		fi
 
 		$WRITE_W ok $wNum
 
 		# Write in configuration file
-		if [[ $fKey -gt 1 ]]; then
+		if test $fKey -gt 1; then
 			echo -e "[Seat:$SEAT_NAME]\nxserver-command=xephyr-wrapper :90.0 -output ${OUTPUTS[$((wNum-1))]}\n" >> $CONF
 		fi
 

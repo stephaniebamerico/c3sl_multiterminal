@@ -60,7 +60,7 @@ declare -a PID_FIND_DEVICES # saves the pid from the launched configuration proc
 
 create_onboard_window () {
 	# Checks if there is a device connected to the onboard card
-	if [ "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected" ]; then
+	if test "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected"; then
 		# Runs Xorg and creates the window for the onboard card
 		DISPLAY_XORGS[$WINDOW_COUNTER]=:$(($WINDOW_COUNTER+10))
 		export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
@@ -72,7 +72,7 @@ create_onboard_window () {
 		xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
 		EXIT_CODE=$?
 		N_ATTEMPT=0
-		while [[ $EXIT_CODE -ne 0 ]]; do
+		while test $EXIT_CODE -ne 0; do
 			sleep 0.5
 			xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
 			EXIT_CODE=$?
@@ -81,7 +81,7 @@ create_onboard_window () {
 				pid=$!
 			fi
 
-			if [[ $N_ATTEMPT -gt $MAX_ATTEMPTS ]]; then
+			if test $N_ATTEMPT -gt $MAX_ATTEMPTS; then
 				echo "[Error] Run Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} failed."
 				exit 1
 	    fi
@@ -114,7 +114,7 @@ create_secundarycard_windows () {
 		xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
 		EXIT_CODE=$?
 		N_ATTEMPT=0
-		while [[ $EXIT_CODE -ne 0 ]]; do
+		while test $EXIT_CODE -ne 0; do
 			sleep 0.5
 			xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
 			EXIT_CODE=$?
@@ -123,7 +123,7 @@ create_secundarycard_windows () {
 				pid=$!
 			fi
 
-			if [[ $N_ATTEMPT -gt $MAX_ATTEMPTS ]]; then
+			if test $N_ATTEMPT -gt $MAX_ATTEMPTS; then
 				echo "[Error] Run Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} failed."
 				exit 1
 	    fi
@@ -153,11 +153,11 @@ configure_devices () {
 }
 
 kill_jobs () {
-	if [[ -n "$(ls | grep lock)" ]]; then
+	if test -n "$(ls | grep lock)"; then
 		rm lock*
 	fi
 
-	if [[ -n "$(ls $MC3SL_DEVICES)" ]]; then
+	if test -n "$(ls $MC3SL_DEVICES)"; then
 		rm -rf $MC3SL_DEVICES/
 	fi
 
@@ -175,7 +175,7 @@ pid=$!
 xdpyinfo -display $FAKE_DISPLAY
 EXIT_CODE=$?
 N_ATTEMPT=0
-while [[ $EXIT_CODE -ne 0 ]]; do
+while test $EXIT_CODE -ne 0; do
 	sleep 0.5
 	xdpyinfo -display $FAKE_DISPLAY
 	EXIT_CODE=$?
@@ -184,7 +184,7 @@ while [[ $EXIT_CODE -ne 0 ]]; do
 		pid=$!
 	fi
 
-	if [[ $N_ATTEMPT -gt $MAX_ATTEMPTS ]]; then
+	if test $N_ATTEMPT -gt $MAX_ATTEMPTS; then
 		echo "[Error] Run Xorg $FAKE_DISPLAY -seat $FAKE_SEAT failed."
 		exit 1
 	fi
@@ -207,13 +207,13 @@ configure_devices
 # Wait until all seats are configured
 N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+$ONBOARD))
 CONFIGURED_SEATS=0
-while [[ $CONFIGURED_SEATS -lt $N_SEATS_LISTED ]]; do
+while test $CONFIGURED_SEATS -lt $N_SEATS_LISTED; do
 	wait -n ${PID_FIND_DEVICES[*]}
 	EXIT_CODE=$?
 
-	if [[ $EXIT_CODE -eq 0 ]]; then
+	if test $EXIT_CODE -eq 0; then
 		CONFIGURED_SEATS=$(($CONFIGURED_SEATS+1))
-	else if [[ $EXIT_CODE -eq 2 ]]; then
+	else if test $EXIT_CODE -eq 2; then
 		echo "[Error] Can not configure output: find-devices.sh failed."
 		rm -f $MC3SL_CONF
 		exit 1
