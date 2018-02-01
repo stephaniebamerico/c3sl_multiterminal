@@ -9,5 +9,5 @@ Vcs-Git: https://gitlab.c3sl.ufpr.br/le6/le-multiterminal.git
 
 Package: le-multiterminal
 Architecture: all
-Depends: ${misc:Depends}, curl, xserver-xorg-video-siliconmotion-hwe-16.04, compton, numlockx, xserver-xephyr-hwe-16.04
+Depends: ${misc:Depends}, curl, xserver-xorg-video-siliconmotion-hwe-16.04, compton, numlockx, xserver-xephyr-hwe-16.04, libc-bin
 Description: Configura multiterminal para funcionar com o LE
