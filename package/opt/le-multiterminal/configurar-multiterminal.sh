@@ -1,6 +1,9 @@
 #!/bin/bash
 
 cd ../../
+# Copia arquivo que altera permissões dos usuários
+install -m 644 etc/polkit-1/localauthority/50-local.d/* /etc/polkit-1/localauthority/50-local.d
+
 # Copia arquivos do X para systemd
 install -m 644 etc/systemd/system/* /etc/systemd/system
 # Copia configs de usb para o udev

@@ -1,0 +1,6 @@
+[Prevents guest users from making changes and turning off the machine]
+Identity=unix-user:guest*
+Action=org.freedesktop.login1.*;org.freedesktop.NetworkManager.*
+ResultAny=no
+ResultInactive=no
+ResultActive=no
