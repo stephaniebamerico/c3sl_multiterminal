@@ -1,3 +1,15 @@
+le-multiterminal (0.0.5) testing; urgency=medium
+
+  * Adds dependency (libc) to ensure operation of the binaries used
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Thu, 01 Feb 2018 13:52:18 -0200
+
+le-multiterminal (0.0.4) testing; urgency=medium
+
+  * Inserts polkit rule that does not allow guest users to turn off the machine and change network settings 
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Thu, 01 Feb 2018 11:38:01 -0200
+
 le-multiterminal (0.0.3) testing; urgency=medium
 
   * Update ifs to the default used by c3sl (test command)
