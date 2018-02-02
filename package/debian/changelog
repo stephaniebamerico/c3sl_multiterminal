@@ -1,3 +1,9 @@
+le-multiterminal (0.0.6) testing; urgency=medium
+
+  * Removes configuration files that change the system in an undesirable way and makes minor modifications to the code to avoid undesired operation
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Fri, 02 Feb 2018 11:33:19 -0200
+
 le-multiterminal (0.0.5) testing; urgency=medium
 
   * Adds dependency (libc) to ensure operation of the binaries used
