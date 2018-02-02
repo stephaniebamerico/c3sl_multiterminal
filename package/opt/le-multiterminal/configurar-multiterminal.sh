@@ -48,4 +48,3 @@ apt -y install curl xserver-xorg-video-siliconmotion-hwe-16.04 compton numlockx 
 
 # Pede eventos ao kernel: "força" a identificação dos dispositivos na maquina
 udevadm trigger
-systemctl restart lightdm
