@@ -1,8 +1,8 @@
-#!/bin/sh
-# Conta quantas placas de video tem
+#!/bin/bash
+
+# Script adapted from Laércio de Sousa <laerciosousa@sme-mogidascruzes.sp.gov.br>
+
 num_cards=$(lspci | grep -c Silicon.Motion)
-# Se nao for igual a 1 ou 2 sai com erro 2
 [ ${num_cards} -ne 1 ] && exit 2
 
-# executa o X
 exec Xorg ${1} -seat __fake-seat-${num_cards}__ -dpms -s 0 -nocursor

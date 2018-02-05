@@ -20,10 +20,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 # USA.
 
-#### Name: multiseat-controller.sh
 #### Description: Prepares the environment and launches the seat configuration scripts.
 #### Xorg that communicates with the Thinnetworks card (fake-seat) should already be running.
-#### Written by: Stephanie Briere Americo - sba16@c3sl.ufpr.br on 2017.
+#### Written by: Stephanie Briere Americo - sba16@c3sl.inf.ufpr.br on 2017.
 
 set -x
 

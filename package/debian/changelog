@@ -1,3 +1,9 @@
+le-multiterminal (0.0.7) testing; urgency=medium
+
+  * Adds copyright and credits to all files
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Mon, 05 Feb 2018 11:04:37 -0200
+
 le-multiterminal (0.0.6) testing; urgency=medium
 
   * Removes configuration files that change the system in an undesirable way and makes minor modifications to the code to avoid undesired operation

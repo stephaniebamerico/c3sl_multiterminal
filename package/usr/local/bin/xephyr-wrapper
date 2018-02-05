@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+# Script adapted from Laércio de Sousa <laerciosousa@sme-mogidascruzes.sp.gov.br>
 
 tries=10
 export DISPLAY=${1}
@@ -10,7 +12,6 @@ shift
 
 # This is a workaround for the case Xephyr is started before host Xorg
 # server is ready for connections, despite the socket activation.
-# tenta 10 vezes. se nao der, nao deu
 for i in $(seq ${tries})
 do
   if xset q >/dev/null 2>&1

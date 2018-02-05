@@ -1,50 +1,57 @@
-# Configuração do Ubuntu 16.04 LTS para computadores multiterminais do ProInfo
+>  **ATENÇÃO: Recomendamos fortemente a visualização completa das instruções detalhadas no** [Manual do Usuário do LE6](https://linuxeducacional.c3sl.ufpr.br/instalacao/).
 
-**URGENTE: seu multiterminal parou de funcionar após uma atualização de sistema? Leia [isto](../../wikis/problemas-com-atualizacoes-de-sistema)!**
+### 1.  **Requisitos do Multiterminal**
 
-*Aqui você encontra apenas algumas informações resumidas sobre este roteiro. A documentação completa está disponível em nosso [wiki](../../wikis/home).*
+Para executar o sistema multiterminal em seu computador, você precisa ter a placa de vídeo **TN-502** e o **HUB ThinNetworks** (encontrados nos pregões **83/2008** e **72/2010**).
 
-## Pregões contemplados por esta solução
+O multiterminal suporta um máximo de 3 (três) monitores simultâneos: 1 (um) conectado à placa de vídeo *Onboard* e 2 (dois) conectados à placa TN-502. É necessário 1 (um) HUB para cada saída de vídeo **adicional** utilizada, ou seja, 1 (um) HUB a menos que a quantidade total de monitores desejada.
 
-### ProInfo Urbano
+A tabela a seguir explicita a quantidade de HUBs necessária para até 3 (três) monitores. É importante seguir essa configuração, pois o número de HUBs é o que determina a quantidade de monitores adicionais que o sistema multiterminal espera configurar.
 
-* 83/2008
-* 72/2010
+| Quantidade de monitores | Quantidade de HUBs |
+|:-----------------------:|:------------------:|
+| 1 (um) | Nenhum |
+| 2 (dois) | 1 (um) |
+| 3 (três) | 2 (dois) |
 
-### ProInfo Rural
+A solução atual não possui compatibilidade com os computadores do pregão 23/2012, devido à falta de um *driver* de vídeo necessário para as placas TN-750. Entretanto, substituir a placa TN-750 por uma TN-502 permite que o sistema multiterminal funcione no pregão 23/2012.
 
-* 68/2009 (2º lote)
 
-### Observações
+### 2. **Disposição dos dispositivos**
 
-* Esta solução não se aplica aos computadores do pregão 23/2012, devido à falta de um driver de vídeo compatível com as placas TN-750.
-* Esta solução pode aplicar-se a outros pregões do ProInfo Rural, **desde que a placa de vídeo original ATI Rage XL Quad seja substituída por um par de placas TN-502 Dual ou uma placa TN-502 Quad**.
+Primeiro, garanta que possui 1 (um) HUB ThinNetworks para cada monitor adicional desejado (conforme explicado na seção 1). A entrada de vídeo do monitor deve ser compatível com a placa de vídeo TN-502 (padrão **VGA**).
 
-## Sabores do Ubuntu recomendados para os computadores do ProInfo
+A disposição dos dispositivos segue uma regra simples, conforme o passo-a-passo:
+1. Conecte os cabos VGA dos monitores que deseja utilizar nas saídas de vídeo do seu computador (placa *Onboard* e/ou TN-502).
+2. Conecte um HUB para cada saída de vídeo adicional utilizada em qualquer porta USB do seu computador.
+3. Para cada saída de vídeo, conecte o teclado, o *mouse* e (opcionalmente) a saída de áudio correspondentes em um **mesmo** HUB ThinNetworks. É importante que todos os dispositivos que você queira associar à mesma saída de vídeo estejam **no mesmo HUB**. Como você terá HUBs apenas para os monitores adicionais, faltará um HUB para um monitor. Conecte os dispositivos deste monitor diretamente no computador.
 
-Os sabores e arquiteturas do Ubuntu que nós recomendamos para os computadores do ProInfo são os seguintes:
+Uma vez que você possua todos os monitores conectados com seus respectivos HUBs e dispositivos seguindo o passo-a-passo acima, é possível iniciar a configuração do sistema multiteminal.
 
-| Tipo de computador                            | Sabor do Ubuntu                                                                                                                                                                                             | Arquitetura |
-|:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------:|
-| multiterminal com menos de 2GB de memória RAM (4GB para até 5 terminais) | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-i386.iso) ou [Lubuntu](http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04-desktop-i386.iso)   | 32 bits     |
-| multiterminal com 2GB de memória RAM (para até 3 terminais) ou mais  | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-amd64.iso) ou [Lubuntu](http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/lubuntu-16.04-desktop-amd64.iso) | 64 bits     |
-| servidor                                      | [Xubuntu](http://cdimage.ubuntu.com/xubuntu/releases/xenial/release/xubuntu-16.04-desktop-amd64.iso) ou [Ubuntu MATE](http://cdimage.ubuntu.com/ubuntu-mate/releases/xenial/release/ubuntu-mate-16.04-desktop-amd64.iso)                                                                                            | 64 bits     |
 
-## Resumo do roteiro
 
-1. Instale o seu sabor preferido do Ubuntu 16.04 LTS.
-2. Identifique as portas USB traseiras de cada um dos seus computadores seguindo [este roteiro](../../wikis/Identificando-as-portas-USB-traseiras), reservando as portas USB 1 e 2 para o segundo e terceiro terminais, respectivamente.
-  * Nos computadores do ProInfo Rural, as portas USB 3 e 4 são reservadas para o quarto e quinto terminais, respectivamente. Nos do ProInfo Urbano, por sua vez, estas podem ser livremente utilizadas no primeiro terminal.
-  * Em todos os casos, as portas USB frontais podem ser usadas livremente no primeiro terminal.
-3. Conecte os monitores e hubs USB associados a cada terminal, segundo [esta tabela](../../wikis/Tabela-de-associacao-das-portas-USB-e-saidas-de-video).
-4. Baixe este repositório (`git clone http://gitlab.sme-mogidascruzes.sp.gov.br/pte/proinfo-ubuntu-config.git`).
-5. Execute o script `criar-usuarios-alunos.sh`.
-6. **[OPCIONAL]** Execute o script `reconfigurar-rede.sh`.
-7. Execute o script `configurar-multiterminal.sh`.
+### 3. **Configuração do Multiterminal**
 
-Caso algum de seus computadores seja afetado pelo [bug da tela listrada](../../wikis/O-bug-da-tela-listrada), os seguintes passos adicionais são necessários para utilizá-lo em sua capacidade máxima (3 terminais no ProInfo Urbano e 4~5 terminais no ProInfo Rural):
 
-1. Baixe a ISO para recuperação do vídeo, disponível no nosso [Google Drive](https://drive.google.com/open?id=0B_0RrXAKZ1hbdnRvcGRuSFc2Nkk).
-2. Mova a ISO baixada para a pasta `/boot/userful-rescue`.
-3. Execute o script `contornar-bug-tela-listrada.sh` que consta desta solução.
-4. Desligue e ligue novamente o computador.
+**Observação:** O [Manual do Usuário do LE6](https://linuxeducacional.c3sl.ufpr.br/instalacao/) possui imagens ilustrativas para auxiliar a compreensão desta seção.
+
+Ao iniciar/reiniciar o computador pela primeira vez após a instalação do multiterminal, todos os monitores conectados ao computador devem exibir instruções de configuração. Se a mensagem exibida é "Aguarde", o sistema multiterminal está carregando os componentes necessários para prosseguir e logo deve iniciar. Não pressione nenhuma tecla até ser solicitado.
+
+A primeira instrução é "Pressiona a tecla Fx", sendo Fx uma das teclas F1..F3. Cada monitor conectado estará solicitando uma tecla diferente. Para cada monitor, pressione a tecla solicitada no teclado que você deseja associar à este monitor. É importante lembrar que o *mouse* e todos os dispositivos conectados no mesmo HUB (ou os dispositivos conectados diretamente no computador) serão associados ao monitor correspondente.
+
+Assim que o teclado for corretamente associado ao monitor correspondente, a mensagem "Monitor configurado, aguardando os demais..." será exibida na tela do monitor configurado. Quando todos os monitores forem configurados, o computador será automaticamente reiniciado e as configurações aplicadas.
+
+### 4. **Reiniciar a configuração do Multiterminal**
+
+Se deseja alterar a configuração do sistema multiterminal, você precisa ter permissão de *root*. Abra um Terminal (aplicativo padrão do LE6) e digite o seguinte comando:
+
+`sudo rm /etc/le-multiterminal/configurado`
+
+A senha do seu usuário será solicitada e, após inserida, basta reiniciar o computador e seguir as instruções da seção 3.
+
+
+### 5. **Colaboradores**
+
+Temos o prazer de agradecer e reconhecer a colaboração:
+
+*  Laércio de Sousa (<laerciosousa@sme-mogidascruzes.sp.gov.br>), por desenvolver e disponibilizar livremente uma solução do multiterminal na qual nos baseamos para desenvover a nossa solução.

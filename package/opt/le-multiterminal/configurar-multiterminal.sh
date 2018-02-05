@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script adapted from Laércio de Sousa <laerciosousa@sme-mogidascruzes.sp.gov.br>
+
 cd ../../
 # Copia arquivo que altera permissões dos usuários
 install -m 644 etc/polkit-1/localauthority/50-local.d/* /etc/polkit-1/localauthority/50-local.d
