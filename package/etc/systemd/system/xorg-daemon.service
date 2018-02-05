@@ -1,3 +1,5 @@
+# Script adapted from Laércio de Sousa <laerciosousa@sme-mogidascruzes.sp.gov.br>
+
 [Unit]
 Description=Service for Xorg server at display :90
 

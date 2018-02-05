@@ -1,2 +1,4 @@
-# ThinNetworks Audio Hub USB
+# Script adapted from Laércio de Sousa <laerciosousa@sme-mogidascruzes.sp.gov.br>
+
+# ThinNetworks Hub USB
 SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", ATTR{idProduct}=="0608", TAG+="master-of-seat"

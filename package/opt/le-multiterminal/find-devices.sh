@@ -20,7 +20,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 # USA.
 
-#### Name: find-devices.sh
 #### Description: Handles the event of a keyboard and associates the seat with the corresponding output.
 #### Written by: Stephanie Briere Americo - sba16@c3sl.ufpr.br on 2017.
 
