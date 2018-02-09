@@ -13,5 +13,4 @@ systemctl start xorg-daemon.socket
 udevadm trigger
 
 echo "Por favor reinicie o sistema para o multiterminal ser reconfigurado!"
-
 exit 0
