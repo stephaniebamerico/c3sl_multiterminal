@@ -26,21 +26,20 @@
 
 set -x
 
-export PATH=$PATH:/opt/le-multiterminal
-
 ## Auxiliary scripts
-source /opt/le-multiterminal/find-devices.sh
-source /opt/le-multiterminal/window-acess.sh
+source /usr/sbin/find-devices
+source /usr/sbin/window-acess
 
 ## Path constants
-MC3SL_DEVICES="/opt/le-multiterminal/devices" # shortcut to devices that have already been paired
+MC3SL_DEVICES="/usr/sbin/devices" # shortcut to devices that have already been paired
+#TODO: This path is correctly??
 MC3SL_CONF="/opt/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
 LIGHTDM_CONF="/etc/xdg/lightdm/lightdm.conf.d/98-xephyr-multi-seat.conf"
 
 ## Script/function in other file
-FIND_KEYBOARD="find_keyboard" # "find-devices.sh"
-CREATE_WINDOW="create_window" # "window-acess.sh"
-WRITE_WINDOW="write_window" # "window-acess.sh"
+FIND_KEYBOARD="find_keyboard" # "find-devices"
+CREATE_WINDOW="create_window" # "window-acess"
+WRITE_WINDOW="write_window" # "window-acess"
 
 ## Macros
 FAKE_DISPLAY=:90 # display to access fake-seat (secondary card)
@@ -54,7 +53,7 @@ WINDOW_COUNTER=0 # how many windows were created
 N_SEATS_LISTED=0 # how many seats are there in the system
 ONBOARD=0 # if the onboard is connected
 declare -a DISPLAY_XORGS # saves the display of the Xorg launched processes
-declare -a ID_WINDOWS # saves the created window ids (used in window-acess.sh)
+declare -a ID_WINDOWS # saves the created window ids (used in window-acess)
 declare -a PID_FIND_DEVICES # saves the pid from the launched configuration processes
 
 create_onboard_window () {
@@ -213,7 +212,7 @@ while test $CONFIGURED_SEATS -lt $N_SEATS_LISTED; do
 	if test $EXIT_CODE -eq 0; then
 		CONFIGURED_SEATS=$(($CONFIGURED_SEATS+1))
 	else if test $EXIT_CODE -eq 2; then
-		echo "[Error] Can not configure output: find-devices.sh failed."
+		echo "[Error] Can not configure output: find-devices failed."
 		rm -f $MC3SL_CONF
 		exit 1
 	fi

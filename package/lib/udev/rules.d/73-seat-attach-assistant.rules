@@ -2,6 +2,6 @@
 
 ACTION=="remove", GOTO="seat_end"
 
-SUBSYSTEM=="usb", TAG=="master-of-seat", ENV{ID_SEAT}=="", RUN+="/usr/local/bin/seat-attach-assistant $devpath $env{ID_PATH_TAG}"
+SUBSYSTEM=="usb", TAG=="master-of-seat", ENV{ID_SEAT}=="", RUN+="/usr/sbin/seat-attach-assistant $devpath $env{ID_PATH_TAG}"
 
 LABEL="seat_end"

@@ -1,14 +1,16 @@
 #!/bin/sh
 # postinst script for le-multiterminal
+#DEBHELPER#
+set -e
 
 update-xorg-conf "Silicon.Motion" /etc/X11/xorg.conf.d/98-proinfo-*.conf
 
 systemctl daemon-reload
-systemctl enable le-multiterminal
+deb-systemctl-helper enable le-multiterminal
 
 # habilita e roda o xorg-daemon
-systemctl enable xorg-daemon.socket
-systemctl start xorg-daemon.socket
+deb-systemctl-helper enable xorg-daemon.socket
+deb-systemctl-invoke start xorg-daemon.socket
 
 udevadm trigger
 

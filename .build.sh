@@ -11,7 +11,7 @@ VERSION=$(echo $LINE | cut -d' ' -f2 | grep -o -E '[0-9]*\.[0-9]*\.[0-9]*')
 tar --exclude=debian -czf ${PACKAGE}_${VERSION}.orig.tar.gz package/*
 
 cd package
-debuild -us -uc
+debuild -us -uc --lintian-opts --profile debian
 cd ../
 
 mkdir build/

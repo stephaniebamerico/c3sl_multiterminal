@@ -4,10 +4,10 @@ Priority: optional
 Maintainer: C3SL <contato@c3sl.ufpr.br>
 Uploaders: Stephanie Briere Americo <sba16@c3sl.ufpr.br>
 Build-Depends: debhelper (>=9)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.7
 Vcs-Git: https://gitlab.c3sl.ufpr.br/le6/le-multiterminal.git
 
 Package: le-multiterminal
 Architecture: amd64
-Depends: ${misc:Depends}, curl, xserver-xorg-video-siliconmotion-hwe-16.04, compton, numlockx, xserver-xephyr-hwe-16.04, libc-bin, lightdm, xorg, udev, systemd, policykit-1-gnome, libcairo2
+Depends: ${misc:Depends}, ${shlibs:Depends}, curl, xserver-xorg-video-siliconmotion-hwe-16.04, compton,numlockx, xserver-xephyr-hwe-16.04, lightdm, udev, systemd, policykit-1-gnome, libcairo2
 Description: Configura multiterminal para funcionar com o LE
