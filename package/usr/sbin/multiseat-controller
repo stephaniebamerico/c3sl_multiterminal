@@ -27,13 +27,13 @@
 set -x
 
 ## Auxiliary scripts
-source /usr/sbin/find-devices
-source /usr/sbin/window-acess
+source /usr/lib/find-devices
+source /usr/lib/window-acess
 
 ## Path constants
 MC3SL_DEVICES="/usr/sbin/devices" # shortcut to devices that have already been paired
 #TODO: This path is correctly??
-MC3SL_CONF="/opt/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
+MC3SL_CONF="/etc/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
 LIGHTDM_CONF="/etc/xdg/lightdm/lightdm.conf.d/98-xephyr-multi-seat.conf"
 
 ## Script/function in other file

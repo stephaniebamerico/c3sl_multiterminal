@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # This script generates a .deb package
-
-apt-get update && apt-get install -y devscripts
+BUILD_DEPS=$(grep 'Build-Depends' package/debian/control | cut -d' ' -f2- | tr ', ' ' ' | sed -E "s/ \((>|<|=)+[0-9]\)//g")
+apt-get update && apt-get install -y devscripts ${BUILD_DEPS}
 
 CHANGELOG="package/debian/changelog"
 LINE=$(head -n 1 $CHANGELOG)

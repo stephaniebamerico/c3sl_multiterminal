@@ -2,9 +2,9 @@ etc/X11/xorg.conf.d/97-proinfo-monitores.conf etc/X11/xorg.conf.d/
 etc/X11/xorg.conf.d/98-proinfo-urbano.conf etc/X11/xorg.conf.d/
 etc/le-multiterminal/readme etc/le-multiterminal/
 etc/polkit-1/localauthority/50-local.d/90-restrict-guest-permissions.pkla etc/polkit-1/localauthority/50-local.d/
-etc/systemd/system/le-multiterminal.service etc/systemd/system/
-etc/systemd/system/xorg-daemon.service etc/systemd/system/
-etc/systemd/system/xorg-daemon.socket etc/systemd/system/
+lib/systemd/system/le-multiterminal.service lib/systemd/system/
+lib/systemd/system/xorg-daemon.service lib/systemd/system/
+lib/systemd/system/xorg-daemon.socket lib/systemd/system/
 etc/xdg/lightdm/lightdm.conf.d/97-no-screen-blanking.conf etc/xdg/lightdm/lightdm.conf.d/
 lib/udev/rules.d/71-seat-usb.rules lib/udev/rules.d/
 lib/udev/rules.d/73-seat-attach-assistant.rules lib/udev/rules.d/

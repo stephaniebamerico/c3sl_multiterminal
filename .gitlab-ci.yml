@@ -23,10 +23,8 @@ test:
     - regular
   script:
     # TODO: find a way to get the dependencies automatically
-    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales
-    - locale-gen pt_BR.UTF-8
-    - export LANG=pt_BR.UTF-8
-    - DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y udev
+    - DEBIAN_FRONTEND=noninteractive apt-get -y -q install $(pwd)/build/*.deb
   dependencies:
     - build
 

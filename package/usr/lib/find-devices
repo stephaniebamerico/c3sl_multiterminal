@@ -24,13 +24,13 @@
 #### Written by: Stephanie Briere Americo - sba16@c3sl.ufpr.br on 2017.
 
 ## Macros
-DEVICES="/sbin/devices" # shortcut to devices that have already been paired
+DEVICES="/etc/le-multiterminal/devices" # shortcut to devices that have already been paired
 #TODO: This path is correctly??
-CONF="/opt/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
+CONF="/etc/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
 
 ## Script/function in other file
-READ_DEVICES="read-devices"
-DETECT_KEYBOARDS="/sbin/detect-keyboard"
+READ_DEVICES="/usr/sbin/read-devices"
+DETECT_KEYBOARDS="/usr/sbin/detect-keyboard"
 WRITE_W="write_window" # "window-acess"
 
 ## Variables

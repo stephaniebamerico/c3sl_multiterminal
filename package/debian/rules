@@ -1,5 +1,18 @@
 #!/usr/bin/make -f
 
+
 %:
 	dh $@ 
-override_dh_usrlocal:
+#override_dh_usrlocal:
+
+build: build-arch build-indep
+	$(MAKE) -C src/
+	dh_testdir
+	dh_auto_configure
+	dh_auto_build
+	dh_auto_test
+clean: 
+	$(MAKE) -C src/ clean
+	dh_testdir
+	dh_auto_clean
+	dh_clean
