@@ -29,7 +29,7 @@ Before=lightdm.service
 [Service]
 Type=oneshot
 TimeoutSec=infinity
-ExecStart=/opt/le-multiterminal/multiterminal.sh
+ExecStart=/usr/sbin/multiterminal
 
 [Install]
 WantedBy=graphical.target

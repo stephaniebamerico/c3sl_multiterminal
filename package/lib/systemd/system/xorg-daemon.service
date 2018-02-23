@@ -1,0 +1,9 @@
+# Script adapted from Laércio de Sousa <laerciosousa@sme-mogidascruzes.sp.gov.br>
+
+[Unit]
+Description=Service for Xorg server at display :90
+
+[Service]
+ExecStartPre=/usr/sbin/update-xorg-conf Silicon.Motion /etc/X11/xorg.conf.d/98-proinfo-urbano.conf /etc/X11/xorg.conf.d/98-proinfo-rural.conf
+ExecStart=/usr/sbin/xorg-daemon :90
+SuccessExitStatus=0 1

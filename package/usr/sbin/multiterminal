@@ -38,6 +38,6 @@ if test ! -e /etc/le-multiterminal/configurado; then
 fi
 
 if test $CONFIG_FLAG -eq 1; then
-    /opt/le-multiterminal/multiseat-controller.sh >> /var/log/le-multiterminal/controller.log 2>&1
+    /usr/sbin/multiseat-controller >> /var/log/le-multiterminal/controller.log 2>&1
     reboot
 fi

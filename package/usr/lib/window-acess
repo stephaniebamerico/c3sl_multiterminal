@@ -30,7 +30,7 @@ WRITE_MESSAGE="write-message" # it receives as parameter <ID_WINDOW> <Message>
 
 create_window () {
 	#### Description: Create a window in a specific display.
-	#### ID_WINDOWS and WINDOW_COUNTER are declared in "multiseat-controller.sh".
+	#### ID_WINDOWS and WINDOW_COUNTER are declared in "multiseat-controller".
 
 	# Try to access Xorg
 	xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
@@ -69,7 +69,7 @@ create_window () {
 write_window() {
 	#### Description: Writes in a specific window on a particular display.
 	#### Parameters: $1 - message to be written; $2 - display to be used.
-	#### DISPLAY_XORGS and ID_WINDOWS are declared in "multiseat-controller.sh".
+	#### DISPLAY_XORGS and ID_WINDOWS are declared in "multiseat-controller".
 
 	export DISPLAY=${DISPLAY_XORGS[$2]}
 	case $1 in
