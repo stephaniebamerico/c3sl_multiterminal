@@ -2,6 +2,9 @@
 # postinst script for le-multiterminal
 #DEBHELPER#
 set -e
+
+case "$1" in
+    configure)
 update-xorg-conf "Silicon.Motion" /etc/X11/xorg.conf.d/98-proinfo-*.conf
 
 if [ ! -f /.dockerenv ]; then
@@ -12,7 +15,16 @@ if [ ! -f /.dockerenv ]; then
     deb-systemd-invoke start xorg-daemon.socket
 
     udevadm trigger
+
+    sed -i "s/Exec=\/usr\/bin\/vlc --started-from-file %U/Exec=\/bin\/bash -c \"exec \/usr\/bin\/cvlc --x11-display \$DISPLAY --started-from-file %U\"/" /usr/share/applications/vlc.desktop
 fi
 
 echo "Por favor reinicie o sistema para o multiterminal ser reconfigurado!"
+    ;;
+    
+    triggered)
+    sed -i "s/Exec=\/usr\/bin\/vlc --started-from-file %U/Exec=\/bin\/bash -c \"exec \/usr\/bin\/cvlc --x11-display \$DISPLAY --started-from-file %U\"/" /usr/share/applications/vlc.desktop
+    ;;
+esac
+
 exit 0
