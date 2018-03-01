@@ -1,4 +1,10 @@
-le-multiterminal (0.0.7ubuntu1) testing; urgency=medium
+le-multiterminal (0.0.7) testing; urgency=medium
+
+  * Fixes VLC error when using multiterminal
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Thu, 01 Mar 2018 10:36:53 -0300
+
+le-multiterminal (0.0.7) testing; urgency=medium
 
   * Remove warnings and fix dependencies.
 
