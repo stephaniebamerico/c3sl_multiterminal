@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: C3SL <contato@c3sl.ufpr.br>
 Uploaders: Stephanie Briere Americo <sba16@c3sl.ufpr.br>, Diego Pasqualin <dpasqualin@c3sl.ufpr.br>
 Build-Depends: debhelper (>=9), libx11-dev, libcairo2-dev
-Standards-Version: 3.9.7
+Standards-Version: 3.9.8
 Vcs-Git: https://gitlab.c3sl.ufpr.br/le6/le-multiterminal.git
 
 Package: le-multiterminal
