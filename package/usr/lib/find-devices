@@ -24,7 +24,7 @@
 #### Written by: Stephanie Briere Americo - sba16@c3sl.ufpr.br on 2017.
 
 ## Macros
-DEVICES="/etc/le-multiterminal/devices" # shortcut to devices that have already been paired
+DEVICES="/usr/sbin/devices" # shortcut to devices that have already been paired
 #TODO: This path is correctly??
 CONF="/etc/le-multiterminal/98-xephyr-multi-seat.conf" # lightdm settings file (associates seat to output)
 
