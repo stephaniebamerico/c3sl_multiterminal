@@ -190,6 +190,9 @@ while test $EXIT_CODE -ne 0; do
 	N_ATTEMPT=$(($N_ATTEMPT+1))
 done
 
+udevadm trigger
+udevadm settle --timeout=10
+
 # If the onboard is connected, it creates a window to write on the screen
 create_onboard_window
 
