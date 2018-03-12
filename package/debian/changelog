@@ -1,3 +1,9 @@
+le-multiterminal (1.0.0) testing; urgency=medium
+
+  * Run udevadm triggers to detect all hubs.
+
+ -- Daniel Bissani Furlin <dbf15@inf.ufpr.br>  Mon, 12 Mar 2018 09:03:52 -0300
+
 le-multiterminal (0.0.9) testing; urgency=medium
 
   * Fix path to lock files. 
