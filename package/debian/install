@@ -21,3 +21,4 @@ usr/sbin/seat-attach-assistant usr/sbin/
 usr/sbin/update-xorg-conf usr/sbin/
 usr/sbin/xephyr-wrapper usr/sbin/
 usr/sbin/xorg-daemon usr/sbin/
+etc/security/limits.d/maxlogins.conf etc/security/limits.d/
