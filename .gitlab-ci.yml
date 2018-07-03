@@ -1,9 +1,24 @@
 ## Template para empacotamento utilizando o Gitlab-ci.
 
 stages:
+    - lint
     - build
     - test
     - deploy
+
+lint_shell:
+  stage: lint
+  tags:
+    - debian-packaging
+  script:
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install wget locales locales-all -y
+    - locale-gen pt_BR.UTF-8
+    - export LANG=pt_BR.UTF-8
+    - scversion="stable" # or "v0.4.7", or "latest"
+    - wget "https://storage.googleapis.com/shellcheck/shellcheck-$scversion.linux.x86_64.tar.xz"
+    - tar --xz -xvf "shellcheck-$scversion.linux.x86_64.tar.xz"
+    - shellcheck() { "shellcheck-$scversion/shellcheck" "$@"; }
+    - ./.linter_shell.sh
 
 build:
   stage: build
@@ -13,23 +28,34 @@ build:
   tags:
     - debian-packaging
   script:
-    - apt-get update && apt-get install -y build-essential devscripts dh-make dh-systemd quilt
+    - apt-get update && apt-get install -y devscripts debhelper dh-systemd python-distutils-extra pandoc libx11-dev libcairo2-dev
     - ./.build.sh
 
 test:
   stage: test
   tags:
     - ubuntu
-    - regular
+    - debootstrap
   script:
-    # TODO: find a way to get the dependencies automatically
-    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y udev
-    - DEBIAN_FRONTEND=noninteractive apt-get -y -q install $(pwd)/build/*.deb
+    - echo "Installation test:"
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb
+  dependencies:
+    - build
+
+deploy_for_unstable:
+  stage: deploy
+  only:
+      - develop
+  tags:
+    - debian-packaging
+  script:
+    - ./.deploy.sh
   dependencies:
     - build
 
 deploy_for_testing:
   stage: deploy
+  when: manual
   only:
       - master
   tags:
@@ -50,4 +76,3 @@ deploy_for_stable:
     - ./.deploy.sh
   dependencies:
     - build
-

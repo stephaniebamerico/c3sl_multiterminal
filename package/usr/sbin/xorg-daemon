@@ -3,6 +3,6 @@
 # Script adapted from Laércio de Sousa <laerciosousa@sme-mogidascruzes.sp.gov.br>
 
 num_cards=$(lspci | grep -c Silicon.Motion)
-[ ${num_cards} -ne 1 ] && exit 2
+[ "${num_cards}" -ne 1 ] && exit 2
 
-exec Xorg ${1} -seat __fake-seat-${num_cards}__ -dpms -s 0 -nocursor
+exec Xorg "${1}" -seat "__fake-seat-${num_cards}__" -dpms -s 0 -nocursor
