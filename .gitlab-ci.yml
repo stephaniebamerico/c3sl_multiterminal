@@ -28,8 +28,20 @@ test:
   dependencies:
     - build
 
+deploy_for_unstable:
+  stage: deploy
+  only:
+      - develop
+  tags:
+    - debian-packaging
+  script:
+    - ./.deploy.sh
+  dependencies:
+    - build
+
 deploy_for_testing:
   stage: deploy
+  when: manual
   only:
       - master
   tags:
@@ -50,4 +62,3 @@ deploy_for_stable:
     - ./.deploy.sh
   dependencies:
     - build
-
