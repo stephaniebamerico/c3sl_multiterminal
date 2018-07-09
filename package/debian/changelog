@@ -1,9 +1,3 @@
-le-multiterminal (1.0.1) unstable; urgency=medium
-
-  * Refactor the CI deploy code (Closes: #580)
-
- -- Guilherme Becker Agge <lesuporte@c3sl.ufpr.br>  Fri, 06 Jul 2018 10:17:29 -0300
-
 le-multiterminal (1.0.1) testing; urgency=medium
 
   * Limits sessions to one per user
