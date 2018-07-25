@@ -29,7 +29,7 @@ test:
     - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y udev
     - DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb language-pack-gnome-pt language-pack-pt-base
     - echo "Removal test:"
-    - pkg_name=$(dpkg -I $(pwd)/build/*.deb | grep Package | head -1 | cut -d ':' -f2)
+    - pkg_name=$(head -n 1 package/debian/changelog | cut -d' ' -f1)
     - DEBIAN_FRONTEND=noninteractive apt -y remove $pkg_name
   dependencies:
     - build
