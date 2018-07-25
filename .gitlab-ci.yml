@@ -26,7 +26,8 @@ test:
     - echo "deb http://repo.c3sl.ufpr.br/le6/ unstable main" > /etc/apt/sources.list.d/le6.list
     - wget -O- http://repo.c3sl.ufpr.br/le6/le.c3sl.ufpr.br.key | apt-key add -
     - echo "Installation test:"
-    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb language-pack-gnome-pt language-pack-pt-base
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y udev
+    - DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb language-pack-gnome-pt language-pack-pt-base
     - echo "Removal test:"
     - pkg_name=$(dpkg -I $(pwd)/build/*.deb | grep Package | head -1 | cut -d ':' -f2)
     - DEBIAN_FRONTEND=noninteractive apt -y remove $pkg_name
