@@ -12,12 +12,15 @@ shift
 
 # This is a workaround for the case Xephyr is started before host Xorg
 # server is ready for connections, despite the socket activation.
-for i in $(seq ${tries})
-do
+#for i in $(seq ${tries})
+i=0
+while test $i -lt $tries; do
   if xset q >/dev/null 2>&1
   then
+    # shellcheck disable=SC2068
     exec Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 ${no_xv} ${@}
   fi
+  i=$((i+1))
 done
 
 exit 1

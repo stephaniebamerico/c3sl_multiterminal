@@ -28,4 +28,4 @@
 devpath=$1
 seat_id=seat-$2
 
-loginctl attach ${seat_id} /sys/${devpath}
+loginctl attach "${seat_id}" "/sys/${devpath}"

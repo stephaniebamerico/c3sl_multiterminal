@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2029
 
 # This script uploads an includes a .deb package in our debian repository.
 # The distribution is chosen based on the gitlab-ci stage we are on.

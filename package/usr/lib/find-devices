@@ -33,22 +33,18 @@ READ_DEVICES="/usr/sbin/read-devices"
 DETECT_KEYBOARDS="/usr/sbin/detect-keyboard"
 WRITE_W="write_window" # "window-acess"
 
-## Variables
-declare -a SEATS_LISTED # save the name of the existing seats
-
 find_keyboard () {
 	fKey=$1 # key that this script should expect to be pressed
-	wNum=$(($fKey-1)) # position in the window control vector
-
-	# List all existing seats
-	SEATS_LISTED=(seat0 $(loginctl list-seats | grep seat-))
+	wNum=$((fKey-1)) # position in the window control vector
 
 	CREATED=0
 	while test $CREATED -eq 0; do
 		KEYBOARDS=$($DETECT_KEYBOARDS)
 
 		# List all conected keyboards
-		for i in `ls $MDM_DEVICES | grep "\<keyboard"`; do
+		# shellcheck disable=SC2010
+		for i in $(ls "$MDM_DEVICES" | grep "\<keyboard"); do
+			# shellcheck disable=SC2086
 			KEYBOARDS=$(sed "s#$i##g" <<< $KEYBOARDS)
 		done
 
@@ -59,7 +55,8 @@ find_keyboard () {
 		fi
 
 		# See if someone presses the expected key
-		PRESSED=$($READ_DEVICES $fKey $KEYBOARDS | grep '^detect' | cut -d'|' -f2)
+		# shellcheck disable=SC2086
+		PRESSED=$($READ_DEVICES "$fKey" $KEYBOARDS | grep '^detect' | cut -d'|' -f2)
 
 		# If $READ_DEVICES gets killed the script won't do bad stuff
 		if test -z "$PRESSED"; then
@@ -75,16 +72,17 @@ find_keyboard () {
 		CREATED=1
 
 		# Creates a link to the keyboard so no one else can use it
-		ln -sf $PRESSED $DEVICES/keyboard_$fKey
+		ln -sf "$PRESSED" "$DEVICES/keyboard_$fKey"
 
 		# Check if there is no longer a link to this keyboard
-		for i in `ls $DEVICES | grep "\<keyboard"`; do
+		# shellcheck disable=SC2010
+		for i in $(ls $DEVICES | grep "\<keyboard"); do
 		    if test "$i" != "keyboard_$fKey"; then
-			AUX=$(stat -c %N $DEVICES/$i | cut -d '>' -f2 | cut -d "'" -f2)
+			AUX=$(stat -c %N "$DEVICES/$i" | cut -d '>' -f2 | cut -d "'" -f2)
 
 			if test "$AUX" = "$PRESSED"; then
 			# Keyboard link already exists, try again
-			rm -f $DEVICES/keyboard_$fKey
+			rm -f "$DEVICES/keyboard_$fKey"
 			CREATED=0
 			fi
 		    fi
@@ -92,11 +90,11 @@ find_keyboard () {
 	done
 
 	# Find device address
-	SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
+	SYS_DEV=/sys$(udevadm info "$PRESSED" | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
 
 	if test -n "$SYS_DEV"; then
 		# Now we know the seat/output
-		SEAT_NAME=$(udevadm info -p $SYS_DEV | grep ID_SEAT | cut -d '=' -f2)
+		SEAT_NAME=$(udevadm info -p "$SYS_DEV" | grep ID_SEAT | cut -d '=' -f2)
 
 		# Sometimes the devices that belong to seat0 do not have ID_SEAT
 		if test -z "$SEAT_NAME"; then
@@ -106,7 +104,7 @@ find_keyboard () {
 		$WRITE_W ok $wNum
 
 		# Write in configuration file
-		if test $fKey -gt 1; then
+		if test "$fKey" -gt 1; then
 			echo -e "[Seat:$SEAT_NAME]\nxserver-command=xephyr-wrapper :90.0 -output ${OUTPUTS[$((wNum-1))]}\n" >> $CONF
 		fi
 
