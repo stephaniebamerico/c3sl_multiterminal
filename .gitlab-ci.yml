@@ -1,9 +1,24 @@
 ## Template para empacotamento utilizando o Gitlab-ci.
 
 stages:
+    - lint
     - build
     - test
     - deploy
+
+lint_shell:
+  stage: lint
+  tags:
+    - debian-packaging
+  script:
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install wget locales locales-all -y
+    - locale-gen pt_BR.UTF-8
+    - export LANG=pt_BR.UTF-8
+    - scversion="stable" # or "v0.4.7", or "latest"
+    - wget "https://storage.googleapis.com/shellcheck/shellcheck-$scversion.linux.x86_64.tar.xz"
+    - tar --xz -xvf "shellcheck-$scversion.linux.x86_64.tar.xz"
+    - shellcheck() { "shellcheck-$scversion/shellcheck" "$@"; }
+    - ./.linter_shell.sh
 
 build:
   stage: build
@@ -13,21 +28,20 @@ build:
   tags:
     - debian-packaging
   script:
-    - apt-get update && apt-get install -y build-essential devscripts dh-make dh-systemd quilt
+    - apt-get update && apt-get install -y libx11-dev libcairo2-dev 
     - ./.build.sh
 
 test:
   stage: test
   tags:
     - ubuntu
-    - regular
+    - debootstrap
   script:
     - apt-get update && apt-get install -y wget
     - echo "deb http://repo.c3sl.ufpr.br/le6/ unstable main" > /etc/apt/sources.list.d/le6.list
     - wget -O- http://repo.c3sl.ufpr.br/le6/le.c3sl.ufpr.br.key | apt-key add -
     - echo "Installation test:"
-    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y udev
-    - DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb language-pack-gnome-pt language-pack-pt-base
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install $(pwd)/build/*.deb language-pack-gnome-pt language-pack-pt-base
     - echo "Removal test:"
     - pkg_name=$(head -n 1 package/debian/changelog | cut -d' ' -f1)
     - DEBIAN_FRONTEND=noninteractive apt -y remove $pkg_name

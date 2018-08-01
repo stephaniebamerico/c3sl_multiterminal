@@ -33,20 +33,20 @@ create_window () {
 	#### ID_WINDOWS and WINDOW_COUNTER are declared in "multiseat-controller".
 
 	# Try to access Xorg
-	xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
+	xdpyinfo -display "${DISPLAY_XORGS[$WINDOW_COUNTER]}"
 	EXIT_CODE=$?
 	while test $EXIT_CODE -ne 0; do
 		sleep 0.5
-		xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
+		xdpyinfo -display "${DISPLAY_XORGS[$WINDOW_COUNTER]}"
 		EXIT_CODE=$?
 	done
 
 	# Get screen resolution
-	SCREEN_RESOLUTION=$(xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
+	SCREEN_RESOLUTION=$(xdpyinfo -display "${DISPLAY_XORGS[$WINDOW_COUNTER]}" | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
 
 	# Creates a new window for writing on this output
-	WINDOW_NAME=w$(($WINDOW_COUNTER+1))
-	$NEW_WINDOW $SCREEN_RESOLUTION+0+0 $WINDOW_NAME &
+	WINDOW_NAME=w$((WINDOW_COUNTER+1))
+	$NEW_WINDOW "$SCREEN_RESOLUTION+0+0" $WINDOW_NAME &
 
 	# Try to access the window
 	xwininfo -name $WINDOW_NAME
@@ -60,10 +60,10 @@ create_window () {
 	# Get the window id
 	ID_WINDOWS[$WINDOW_COUNTER]=$(xwininfo -name $WINDOW_NAME | grep "Window id" | cut -d ' ' -f4)
 
-	write_window wait_load $WINDOW_COUNTER
+	write_window wait_load "$WINDOW_COUNTER"
 
 	# Increases the number of windows
-	WINDOW_COUNTER=$(($WINDOW_COUNTER+1))
+	WINDOW_COUNTER=$((WINDOW_COUNTER+1))
 }
 
 write_window() {
@@ -74,12 +74,12 @@ write_window() {
 	export DISPLAY=${DISPLAY_XORGS[$2]}
 	case $1 in
 		ok)
-			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Monitor configurado, aguarde o restante ficar pronto" ;;
+			$WRITE_MESSAGE "${ID_WINDOWS[$2]}" "Monitor configurado, aguarde o restante ficar pronto" ;;
 		wait_load)
-			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Aguarde" ;;
+			$WRITE_MESSAGE "${ID_WINDOWS[$2]}" "Aguarde" ;;
 		press_key)
-			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Pressione a tecla F$(($2+1))" ;;
+			$WRITE_MESSAGE "${ID_WINDOWS[$2]}" "Pressione a tecla F$(($2+1))" ;;
 		press_mouse)
-			$WRITE_MESSAGE ${ID_WINDOWS[$2]} "Pressione o botão esquerdo do mouse" ;;
+			$WRITE_MESSAGE "${ID_WINDOWS[$2]}" "Pressione o botão esquerdo do mouse" ;;
     esac
 }

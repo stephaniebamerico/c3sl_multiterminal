@@ -23,9 +23,9 @@
 #### Written by: Thiago Abdo - tja14@c3sl.ufpr.br on 2017.
 
 for i in /dev/input/*; do
-    if test -c $i; then
-        if udevadm info $i | grep -qw ID_INPUT_KEYBOARD; then
-            echo $i
+    if test -c "$i"; then
+        if udevadm info "$i" | grep -qw ID_INPUT_KEYBOARD; then
+            echo "$i"
         fi
     fi
 done

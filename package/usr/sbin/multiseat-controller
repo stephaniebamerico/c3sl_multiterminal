@@ -27,7 +27,9 @@
 set -x
 
 ## Auxiliary scripts
+# shellcheck disable=SC1091
 source /usr/lib/find-devices
+# shellcheck disable=SC1091
 source /usr/lib/window-acess
 
 ## Path constants
@@ -53,14 +55,13 @@ WINDOW_COUNTER=0 # how many windows were created
 N_SEATS_LISTED=0 # how many seats are there in the system
 ONBOARD=0 # if the onboard is connected
 declare -a DISPLAY_XORGS # saves the display of the Xorg launched processes
-declare -a ID_WINDOWS # saves the created window ids (used in window-acess)
 declare -a PID_FIND_DEVICES # saves the pid from the launched configuration processes
 
 create_onboard_window () {
 	# Checks if there is a device connected to the onboard card
 	if test "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected"; then
 		# Runs Xorg and creates the window for the onboard card
-		DISPLAY_XORGS[$WINDOW_COUNTER]=:$(($WINDOW_COUNTER+10))
+		DISPLAY_XORGS[$WINDOW_COUNTER]=:$((WINDOW_COUNTER+10))
 		export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
 
 		Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} &
@@ -84,7 +85,7 @@ create_onboard_window () {
 				exit 1
 	    fi
 
-			N_ATTEMPT=$(($N_ATTEMPT+1))
+			N_ATTEMPT=$((N_ATTEMPT+1))
 		done
 
 		$CREATE_WINDOW
@@ -105,7 +106,7 @@ create_secundarycard_windows () {
 		DISPLAY_XORGS[$WINDOW_COUNTER]=:$((WINDOW_COUNTER+10))
 
 		# Run Xephyr to type in this output
-		Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $i -noxv &
+		Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output "$i" -noxv &
 		pid=$!
 
 		# Guarantees the Xephyr execution
@@ -117,7 +118,7 @@ create_secundarycard_windows () {
 			xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]}
 			EXIT_CODE=$?
 			if ! kill -0 "${pid}" >/dev/null 2>&1; then
-				Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $i -noxv &
+				Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output "$i" -noxv &
 				pid=$!
 			fi
 
@@ -126,7 +127,7 @@ create_secundarycard_windows () {
 				exit 1
 	    fi
 
-			N_ATTEMPT=$(($N_ATTEMPT+1))
+			N_ATTEMPT=$((N_ATTEMPT+1))
 		done
 
 		# Export display and create a window to write on this output
@@ -141,22 +142,23 @@ create_secundarycard_windows () {
 
 configure_devices () {
 	COUNT=0
-	for WINDOW in `seq $WINDOW_ID_INIT $(($WINDOW_COUNTER-1))`; do
-		$FIND_KEYBOARD $(($WINDOW+1)) &
+	for WINDOW in $(seq $WINDOW_ID_INIT $((WINDOW_COUNTER-1))); do
+		$FIND_KEYBOARD $((WINDOW+1)) &
 		PID_FIND_DEVICES[$COUNT]=$!
-		COUNT=$(($COUNT+1))
+		COUNT=$((COUNT+1))
 
-		$WRITE_WINDOW press_key $WINDOW
+		$WRITE_WINDOW press_key "$WINDOW"
 	done
 }
 
 kill_jobs () {
+	# shellcheck disable=SC2010
 	if test -n "$(ls | grep lock)"; then
 		rm lock*
 	fi
 
 	if test -n "$(ls $MC3SL_DEVICES)"; then
-		rm -rf $MC3SL_DEVICES/
+		rm -rf ${MC3SL_DEVICES:?}/
 	fi
 
 	rm -rf $MC3SL_DEVICES
@@ -187,7 +189,7 @@ while test $EXIT_CODE -ne 0; do
 		exit 1
 	fi
 
-	N_ATTEMPT=$(($N_ATTEMPT+1))
+	N_ATTEMPT=$((N_ATTEMPT+1))
 done
 
 udevadm trigger
@@ -206,19 +208,18 @@ mkdir -p $MC3SL_DEVICES
 configure_devices
 
 # Wait until all seats are configured
-N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+$ONBOARD))
+N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+ONBOARD))
 CONFIGURED_SEATS=0
 while test $CONFIGURED_SEATS -lt $N_SEATS_LISTED; do
 	wait -n ${PID_FIND_DEVICES[*]}
 	EXIT_CODE=$?
 
 	if test $EXIT_CODE -eq 0; then
-		CONFIGURED_SEATS=$(($CONFIGURED_SEATS+1))
-	else if test $EXIT_CODE -eq 2; then
+		CONFIGURED_SEATS=$((CONFIGURED_SEATS+1))
+	elif test $EXIT_CODE -eq 2; then
 		echo "[Error] Can not configure output: find-devices failed."
 		rm -f $MC3SL_CONF
 		exit 1
-	fi
 	fi
 done
 
