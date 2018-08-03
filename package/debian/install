@@ -10,7 +10,6 @@ lib/udev/rules.d/71-seat-usb.rules lib/udev/rules.d/
 lib/udev/rules.d/73-seat-attach-assistant.rules lib/udev/rules.d/
 usr/lib/find-devices usr/lib/
 usr/lib/window-acess usr/lib/
-usr/sbin/configurar-multiterminal usr/sbin/
 usr/sbin/detect-keyboard usr/sbin/
 usr/sbin/multiseat-controller usr/sbin/
 usr/sbin/multiterminal usr/sbin/
@@ -21,3 +20,4 @@ usr/sbin/seat-attach-assistant usr/sbin/
 usr/sbin/update-xorg-conf usr/sbin/
 usr/sbin/xephyr-wrapper usr/sbin/
 usr/sbin/xorg-daemon usr/sbin/
+etc/security/limits.d/maxlogins.conf etc/security/limits.d/

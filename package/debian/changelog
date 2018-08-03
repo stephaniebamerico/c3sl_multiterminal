@@ -1,3 +1,15 @@
+le-multiterminal (1.0.2) unstable; urgency=medium
+
+  * Fix Linter errors
+
+ -- Stephanie Briere Americo <lesuporte@c3sl.ufpr.br>  Tue, 03 Jul 2018 11:16:31 -0300
+
+le-multiterminal (1.0.1) testing; urgency=medium
+
+  * Limits sessions to one per user
+
+ -- Stephanie Briere Americo <sba16@c3sl.ufpr.br>  Thu, 14 Jun 2018 11:02:18 -0300
+
 le-multiterminal (1.0.0) testing; urgency=medium
 
   * Run udevadm triggers to detect all hubs.
