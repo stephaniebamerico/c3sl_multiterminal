@@ -61,9 +61,8 @@ deploy_for_unstable:
 
 deploy_for_testing:
   stage: deploy
-  when: manual
   only:
-      - master
+      - /^rc-.*$/
   tags:
     - debian-packaging
   script:
