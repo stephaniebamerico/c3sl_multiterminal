@@ -1,3 +1,14 @@
+le-multiterminal (1.1.0) unstable; urgency=medium
+
+  * Allow guests to hibernate/poweroff/reboot/suspend only when no one else is
+    logged in (Closes: #466)
+  * Add lightdm cleanup script to ensure that the logind session is closed
+  * debian/control: New uploader
+  * debian/install: Add rules to install the lightdm config file and the
+    session cleanup script
+
+ -- Lucas Sulzbach <lesuporte@c3sl.ufpr.br>  Thu, 25 Oct 2018 08:38:10 -0300
+
 le-multiterminal (1.0.2) unstable; urgency=medium
 
   * Fix Linter errors

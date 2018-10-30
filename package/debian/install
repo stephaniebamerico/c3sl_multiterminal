@@ -1,6 +1,7 @@
 etc/X11/xorg.conf.d/97-proinfo-monitores.conf etc/X11/xorg.conf.d/
 etc/X11/xorg.conf.d/98-proinfo-urbano.conf etc/X11/xorg.conf.d/
 etc/le-multiterminal/readme etc/le-multiterminal/
+etc/lightdm/lightdm.conf etc/lightdm/
 etc/polkit-1/localauthority/50-local.d/90-restrict-guest-permissions.pkla etc/polkit-1/localauthority/50-local.d/
 lib/systemd/system/le-multiterminal.service lib/systemd/system/
 lib/systemd/system/xorg-daemon.service lib/systemd/system/
@@ -10,6 +11,7 @@ lib/udev/rules.d/71-seat-usb.rules lib/udev/rules.d/
 lib/udev/rules.d/73-seat-attach-assistant.rules lib/udev/rules.d/
 usr/lib/find-devices usr/lib/
 usr/lib/window-acess usr/lib/
+usr/sbin/cleanup-sessions usr/sbin/
 usr/sbin/detect-keyboard usr/sbin/
 usr/sbin/multiseat-controller usr/sbin/
 usr/sbin/multiterminal usr/sbin/

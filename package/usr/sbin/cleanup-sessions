@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copyright (C) 2017 Centro de Computacao Cientifica e Software Livre
 # Departamento de Informatica - Universidade Federal do Parana - C3SL/UFPR
 #
@@ -18,9 +20,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 # USA.
 
-[Prevents guest users from making changes and turning off the machine]
-Identity=unix-user:guest*
-Action=org.freedesktop.NetworkManager.*;org.freedesktop.login1.hibernate-multiple-sessions;org.freedesktop.login1.power-off-multiple-sessions;org.freedesktop.login1.reboot-multiple-sessions;org.freedesktop.login1.suspend-multiple-sessions
-ResultAny=no
-ResultInactive=no
-ResultActive=no
+#### Description: A lightdm cleanup script to prevent undesirable polkitd behavior.
+#### Problem: The closure of a lightdm desktop session sometimes does not mean that its
+#### respective user logind session is closed as well. This means that one might not be
+#### able to log out of a seat despite the closure of his desktop session, screwing with
+#### multiseat policies.
+#### Workaround: Force the termination of any normal user (non-lightdm) logind session
+#### with a "closing" state.
+#### Written by: Lucas Sulzbach - ls17@c3sl.ufpr.br on 2018.
+
+while read -r SESSION
+do
+	STATUS=$(loginctl session-status "${SESSION}" --no-pager | awk '$1~/State/ {print $2}')
+	# echo "Session ${SESSION} is ${STATUS}"
+	if [[ "${STATUS}" == "closing" ]]; then
+		loginctl terminate-session "${SESSION}"
+	fi
+done < <(loginctl list-sessions | awk '$3!~/lightdm/ && $4~/seat/ {print $1}') 
