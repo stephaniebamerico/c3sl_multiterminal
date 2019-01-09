@@ -1,7 +1,41 @@
-#!/bin/sh
+#!/bin/bash
 # postinst script for le-multiterminal
 #DEBHELPER#
+# Copyright (C) 2004-2019 Centro de Computacao Cientifica e Software Livre
+# Departamento de Informatica - Universidade Federal do Parana - C3SL/UFPR
+#
+# This file is part of le-multiterminal
+#
+# le-multiterminal is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
+# USA.
+
 set -e
+
+# Set option on lightdm.conf. If the option $1 already exists, make sure it
+# has the value $2. If it doesn't exist, add it.
+function setLightdmOption() {
+    local option=$1
+    local value=$2
+    if [[ ! -d "/etc/lightdm/lightdm.conf.d/"  ]]; then
+        mkdir -p "/etc/lightdm/lightdm.conf.d/"
+    fi
+    echo -e "[Seat:*]\\n${option}=${value}" >  /etc/lightdm/lightdm.conf.d/5-multiterminal.conf
+}
+
+# Set lightdm cleanup script
+setLightdmOption "session-cleanup-script" "/usr/sbin/cleanup-sessions"
 
 case "$1" in
     configure)
