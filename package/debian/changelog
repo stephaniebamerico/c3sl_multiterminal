@@ -1,3 +1,15 @@
+le-multiterminal (1.1.1) unstable; urgency=medium
+
+  * Move lightdm config to a dedicated file on /etc/lightdm.conf.d/ (Closes:
+    #644)
+  * debian/install: Remove rule for file lightdm.conf
+  * debian/postinst:
+    - Add GPL in the head of file
+    - Make it a bash script instead of a sh script
+    - Configure lightdm
+
+ -- Lucas Sulzbach <lesuporte@c3sl.ufpr.br>  Mon, 07 Jan 2019 11:26:30 -0200
+
 le-multiterminal (1.1.0) unstable; urgency=medium
 
   * Allow guests to hibernate/poweroff/reboot/suspend only when no one else is

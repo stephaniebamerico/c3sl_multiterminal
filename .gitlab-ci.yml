@@ -28,16 +28,20 @@ build:
   tags:
     - debian-packaging
   script:
-    - apt-get update && apt-get install -y libx11-dev libcairo2-dev 
+    - apt-get update && apt-get install -y libx11-dev libcairo2-dev debhelper
     - ./.build.sh
 
 test:
   stage: test
   tags:
     - ubuntu
-    - debootstrap
+    - regular
   script:
     - apt-get update && apt-get install -y wget
+    # Instalacao previa do lightdm, necessaria devido ao Bug #1537329 do pacote plymouth:
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install lightdm language-pack-gnome-pt language-pack-pt-base
+    # Instalacao previa de dependencias que dao erros devido a conflitos de pacotes na imagem docker ubuntu:16:04 regular:
+    - apt-get install -y xserver-xorg-core-hwe-16.04
     - echo "deb http://repo.c3sl.ufpr.br/le6/ unstable main" > /etc/apt/sources.list.d/le6.list
     - wget -O- http://repo.c3sl.ufpr.br/le6/le.c3sl.ufpr.br.key | apt-key add -
     - echo "Installation test:"
